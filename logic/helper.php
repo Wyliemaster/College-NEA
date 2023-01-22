@@ -18,7 +18,7 @@ class Helpers
     private static function is_operator_bin(string $opcode): bool|string
     {
         // Checking if the input is in the correct format
-        if ( ctype_digit($opcode) && strlen($opcode) == 3)
+        if ( ctype_digit($opcode) && strlen($opcode) == 3 )
         {
 
             // Checking the first digit of the instruction
@@ -74,7 +74,8 @@ class Helpers
     */
     private static function is_operator_ins(string $instruction): bool|string
     {
-        if ( !ctype_digit($instruction) && strlen($instruction) == 3)
+        // Checking if the argument is in the correct format
+        if ( !ctype_digit($instruction) && strlen($instruction) == 3 )
         {
             switch($instruction)
             {
@@ -131,7 +132,5 @@ class Helpers
 
         return Keys::INVALID;
     }
-
-
 };
 ?>
