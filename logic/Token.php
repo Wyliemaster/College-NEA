@@ -1,19 +1,26 @@
 <?php
 include "LMC.php";
 include "keys.php";
-error_reporting(0);
+
+
+
+// @Description - Object to handle tokens
 class Token
 {
     // @type = Int
+    // @Description - Special Flags for certain instructions
     public $Flags = 0;
 
     // @type = String
+    // @Description - Key for the instruction
     public $key = "";
 
     // @type = String
+    // @Description - The value for an instruction
     public $value = "";
 
     // @type string
+    // @Description - Name for data variable if the instruction is DAT
     public $data_name = NULL;
 
     
@@ -138,7 +145,6 @@ class Token
         echo var_dump($token);
 
     }
-
 
     public static function tokenise($instruction): Token
     {
