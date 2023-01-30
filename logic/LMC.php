@@ -32,4 +32,18 @@ class Mnemonic
 
     const DAT = "DAT";
 };
+
+class Flags
+{
+    // enums don't allow chosing the number in php for some reason
+    // enum Flags 
+    // {
+    //     case kZero = 1;
+    //     case kPositive = 2;
+    // };
+    const kZero = 1 << 0;
+    const kPositive = 1 << 1;
+}
+
+
 ?>

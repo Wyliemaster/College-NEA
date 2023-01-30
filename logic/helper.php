@@ -1,6 +1,7 @@
 <?php
 include "LMC.php";
 include "keys.php";
+include "Token.php";
 
 class Helpers
 {
@@ -15,7 +16,7 @@ class Helpers
             returns true if the input is an operator
             otherwise it returns a key which is used for other logic
     */
-    private static function is_operator_bin(string $opcode): bool|string
+    private static function Tokenise_bin(string $opcode, Token $token): string
     {
         // Checking if the input is in the correct format
         if ( ctype_digit($opcode) && strlen($opcode) == 3 )
@@ -42,17 +43,21 @@ class Helpers
                 break;
 
             // Branching
-            case Opcodes::BRA:
             case Opcodes::BRZ:
+                $token->Flags |= Flags::kZero;
             case Opcodes::BRP:
+                $token->Flags |= Flags::kPositive;
+            case Opcodes::BRA:
                 return Keys::BRANCH;
 
-            // Actual Operators
             case Opcodes::ADD:
+                return Keys::ADD;
             case Opcodes::SUB:
+                return Keys::SUB;
             case Opcodes::STA:
+                return Keys::STORE;
             case Opcodes::LDA:
-                return true;
+                return Keys::LOAD;
 
             default:
                 return Keys::DATA;
@@ -72,7 +77,7 @@ class Helpers
             returns true if the input is an operator
             otherwise it returns a key which is used for other logic
     */
-    private static function is_operator_ins(string $instruction): bool|string
+    private static function tokenise_ins(string $instruction, Token $token): string
     {
         // Checking if the argument is in the correct format
         if ( !ctype_digit($instruction) && strlen($instruction) == 3 )
@@ -88,16 +93,23 @@ class Helpers
                 case Mnemonic::OUT:
                     return Keys::OUTPUT;
 
-                case Mnemonic::BRA:
                 case Mnemonic::BRZ:
+                    $token->Flags |= Flags::kZero;
+
                 case Mnemonic::BRP:
+                    $token->Flags |= Flags::kPositive;
+
+                case Mnemonic::BRA:
                     return Keys::BRANCH;
 
                 case Mnemonic::ADD:
+                    return Keys::ADD;
                 case Mnemonic::SUB:
+                    return Keys::SUB;
                 case Mnemonic::STA:
+                    return Keys::STORE;
                 case Mnemonic::LDA:
-                    return true;
+                    return Keys::LOAD;
 
                 case Mnemonic::DAT:
                     return Keys::DATA;
@@ -111,26 +123,31 @@ class Helpers
     }
 
     /*
-        Checks for an operator used
 
         Arguments:
             String $opcode - 3 character string denoting the instruction or opcode
 
         return:
-            returns true if the input is an operator
-            otherwise it returns a key which is used for other logic
+            returns a token alongside flags for instruction
     */
-    public static function is_operator(string $instruction): bool|string
+    public static function tokenise(string $instruction): Token
     {
         if( strlen($instruction) == 3 )
         {
-            if ( ctype_digit($instruction) )
-                return Self::is_operator_bin($instruction);
+            $key = Keys::INVALID;
 
-            return Self::is_operator_ins($instruction);
+            $token = new Token();
+
+            if ( ctype_digit($instruction) )
+                $key =  Self::Tokenise_bin($instruction, $token);
+
+            $key = Self::tokenise_ins($instruction, $token);
+
+            $token->key = $key;
         }
 
-        return Keys::INVALID;
+        return $token;
+        // return Keys::INVALID;
     }
 };
 ?>

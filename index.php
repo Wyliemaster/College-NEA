@@ -1,10 +1,8 @@
 <?php
-include "logic/helper.php";
+include "logic/Token.php";
 
-echo Helpers::is_operator('BRA')."<br>";
+$instruction = array(0 => "ADD", 1 => 5);
+$instruction2 = array(0 => "numone", 1 => "DAT", 2 => 9);
 
-echo Helpers::is_operator('OUT')."<br>";
-
-echo Helpers::is_operator("901")."<br>";
-
-echo Helpers::is_operator("202");
+Token::tokenise($instruction2);
+Token::tokenise("999");
