@@ -14,8 +14,21 @@ class Decompiler
             array_push($this->token_queue, $token);
     }
 
-    public function get_queue()
+    public function peak()
     {
-        return $this->token_queue;
+        if (count($this->token_queue) > 0) {
+            return $this->token_queue[0];
+        }
+    }
+
+    public function get_from_queue_and_update()
+    {
+
+        if (count($this->token_queue) > 0) {
+            $data = $this->peak();
+            unset($this->token_queue[0]);
+            array_shift($this->token_queue);
+            return $data;
+        }
     }
 }
