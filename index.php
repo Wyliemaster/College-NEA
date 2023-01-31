@@ -1,8 +1,7 @@
 <?php
-include "logic/Token.php";
+include "logic/helper.php";
 
-$instruction = array(0 => "ADD", 1 => 5);
-$instruction2 = array(0 => "numone", 1 => "DAT", 2 => 9);
+Helpers::handle_input("100201", "2167");
 
-Token::tokenise($instruction2);
-Token::tokenise("999");
+echo var_dump(Helpers::get_shared_decompiler()->get_queue());
+

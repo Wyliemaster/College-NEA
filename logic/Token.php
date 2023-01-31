@@ -1,8 +1,6 @@
 <?php
-include "LMC.php";
-include "keys.php";
-
-
+include_once "LMC.php";
+include_once "keys.php";
 
 // @Description - Object to handle tokens
 class Token
@@ -37,7 +35,10 @@ class Token
             // Doesn't have an operator so returning HALT key
             case Opcodes::HLT:
                 if ( intval($opcode) == Opcodes::HLT )
+                {
                     $token->key = Keys::HALT;
+                    break;
+                }
 
             // User input and output are complicated so using keys for them
             case Opcodes::IO:
@@ -60,20 +61,25 @@ class Token
                 $token->Flags |= Flags::kPositive;
             case Opcodes::BRA:
                 $token->key = Keys::BRANCH;
+                break;
 
             case Opcodes::ADD:
                 $token->key = Keys::ADD;
+                break;
             case Opcodes::SUB:
                 $token->key = Keys::SUB;
+                break;
             case Opcodes::STA:
                 $token->key = Keys::STORE;
+                break;
             case Opcodes::LDA:
                 $token->key = Keys::LOAD;
-
+                break;
             default:
                 $token->key = Keys::DATA;
+                $token->value = $opcode;
+                break;
            }
-           echo var_dump($token);
         }
     }
 
@@ -141,9 +147,6 @@ class Token
                 $token->value = $instruction[2];
             }
         }
-
-        echo var_dump($token);
-
     }
 
     public static function tokenise($instruction): Token
