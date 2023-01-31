@@ -21,65 +21,60 @@ class Token
     // @Description - Name for data variable if the instruction is DAT
     public $data_name = NULL;
 
-    
+
     private static function Tokenise_bin(string $opcode, Token $token): void
     {
         // Checking if the input is in the correct format
-        if ( ctype_digit($opcode) && strlen($opcode) == 3 )
-        {
+        if (ctype_digit($opcode) && strlen($opcode) == 3) {
 
             // Checking the first digit of the instruction
-           switch ( intval($opcode[0]) )
-           {
+            switch (intval($opcode[0])) {
 
-            // Doesn't have an operator so returning HALT key
-            case Opcodes::HLT:
-                if ( intval($opcode) == Opcodes::HLT )
-                {
-                    $token->key = Keys::HALT;
+                    // Doesn't have an operator so returning HALT key
+                case Opcodes::HLT:
+                    if (intval($opcode) == Opcodes::HLT) {
+                        $token->key = Keys::HALT;
+                        break;
+                    }
+
+                    // User input and output are complicated so using keys for them
+                case Opcodes::IO:
+                    if (intval($opcode[2] == Opcodes::IO_INPUT)) {
+                        $token->key = Keys::INPUT;
+                        break;
+                    }
+
+                    if (intval($opcode[2] == Opcodes::IO_OUTPUT)) {
+                        $token->key = Keys::OUTPUT;
+                        break;
+                    }
+
+                    // Branching
+                case Opcodes::BRZ:
+                    $token->Flags |= Flags::kZero;
+                case Opcodes::BRP:
+                    $token->Flags |= Flags::kPositive;
+                case Opcodes::BRA:
+                    $token->key = Keys::BRANCH;
                     break;
-                }
 
-            // User input and output are complicated so using keys for them
-            case Opcodes::IO:
-                if ( intval($opcode[2] == Opcodes::IO_INPUT ) )
-                {
-                    $token->key = Keys::INPUT;
+                case Opcodes::ADD:
+                    $token->key = Keys::ADD;
                     break;
-                }
-
-                if ( intval($opcode[2] == Opcodes::IO_OUTPUT) )
-                {
-                    $token->key = Keys::OUTPUT;
+                case Opcodes::SUB:
+                    $token->key = Keys::SUB;
                     break;
-                }
-
-            // Branching
-            case Opcodes::BRZ:
-                $token->Flags |= Flags::kZero;
-            case Opcodes::BRP:
-                $token->Flags |= Flags::kPositive;
-            case Opcodes::BRA:
-                $token->key = Keys::BRANCH;
-                break;
-
-            case Opcodes::ADD:
-                $token->key = Keys::ADD;
-                break;
-            case Opcodes::SUB:
-                $token->key = Keys::SUB;
-                break;
-            case Opcodes::STA:
-                $token->key = Keys::STORE;
-                break;
-            case Opcodes::LDA:
-                $token->key = Keys::LOAD;
-                break;
-            default:
-                $token->key = Keys::DATA;
-                $token->value = $opcode;
-                break;
-           }
+                case Opcodes::STA:
+                    $token->key = Keys::STORE;
+                    break;
+                case Opcodes::LDA:
+                    $token->key = Keys::LOAD;
+                    break;
+                default:
+                    $token->key = Keys::DATA;
+                    $token->value = $opcode;
+                    break;
+            }
         }
     }
 
@@ -87,10 +82,8 @@ class Token
     private static function tokenise_ins(array $instruction, Token $token): void
     {
         // Checking if the argument is in the correct format
-        if ( count($instruction) < 3 && !ctype_digit($instruction[0]) && strlen($instruction[0]) == 3 )
-        {
-            switch($instruction[0])
-            {
+        if (count($instruction) < 3 && !ctype_digit($instruction[0]) && strlen($instruction[0]) == 3) {
+            switch ($instruction[0]) {
                 case Mnemonic::HLT:
                     $token->key = Keys::HALT;
                     break;
@@ -133,15 +126,10 @@ class Token
                 default:
                     $token->key = Keys::INVALID;
                     break;
-
             }
             $token->value = $instruction[1];
-        }
-
-        else
-        {
-            if ($instruction[1] == Mnemonic::DAT)
-            {
+        } else {
+            if ($instruction[1] == Mnemonic::DAT) {
                 $token->data_name = $instruction[0];
                 $token->key = Keys::DATA;
                 $token->value = $instruction[2];

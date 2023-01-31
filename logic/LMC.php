@@ -44,6 +44,3 @@ class Flags
     const kZero = 1 << 0;
     const kPositive = 1 << 1;
 }
-
-
-?>
