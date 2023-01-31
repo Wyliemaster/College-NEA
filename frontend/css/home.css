@@ -1,0 +1,38 @@
+.main-input-output
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.main-input-output-box
+{
+    background-color: rgba(0, 0, 0, 0.124);
+    box-sizing: content-box;
+    width: 80%;
+    height: 1024px;
+    word-wrap: break-word;
+    inline-size: 40%;
+}
+
+.main-input-output-buttons
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.main-input-output-btn
+{
+    height: 75px;
+    width: 200px;
+    margin: 15px 10px;
+    padding: 20px;
+    text-align: center;
+
+}
