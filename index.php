@@ -1,10 +1,21 @@
 <?php
 include "logic/helper.php";
 
-Helpers::handle_input("100201", "2167");
+$files = glob('TestData/LMC_ALPHABET.bin');
+foreach($files as $file) {
 
-Helpers::get_shared_decompiler()->get_from_queue_and_update();
-Helpers::get_shared_decompiler()->get_from_queue_and_update();
+    $data = fopen($file, "r");
 
-echo var_dump(Helpers::get_shared_decompiler());
+    $input = fread($data, filesize($file))."<br>";
+
+    Helpers::handle_input($input, "2167");
+}
+
+echo "<pre>",var_dump(Helpers::get_shared_decompiler()->get_queue()),"</pre>";
+
+
+
+// Helpers::handle_input("100201", "2167");
+
+
 

@@ -31,4 +31,9 @@ class Decompiler
             return $data;
         }
     }
+
+    public function get_queue()
+    {
+        return $this->token_queue;
+    }
 }

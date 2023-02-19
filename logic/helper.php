@@ -9,10 +9,9 @@ class Helpers
 
     public static function handle_input(string $input, string $magic)
     {
-
         if ($magic == "2167") // File
         {
-            if (strlen($input) % 3 == 0) {
+            if (strlen($input) % 3 == 1) {
                 $data = str_split($input, 3);
 
                 $total_instructions = count($data);

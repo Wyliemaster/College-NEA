@@ -26,16 +26,21 @@ class Token
     {
         // Checking if the input is in the correct format
         if (ctype_digit($opcode) && strlen($opcode) == 3) {
-
             // Checking the first digit of the instruction
             switch (intval($opcode[0])) {
 
                     // Doesn't have an operator so returning HALT key
                 case Opcodes::HLT:
-                    if (intval($opcode) == Opcodes::HLT) {
+                    if (intval(substr($opcode, 1, 2)) == Opcodes::HLT) {
                         $token->key = Keys::HALT;
                         break;
                     }
+
+                    // Sometimes the logic may interpret DATA as a HALT instruction
+                    // this line is to account for it
+                    $token->key = Keys::DATA;
+                    $token->value = $opcode;
+                    break;
 
                     // User input and output are complicated so using keys for them
                 case Opcodes::IO:
@@ -56,19 +61,24 @@ class Token
                     $token->Flags |= Flags::kPositive;
                 case Opcodes::BRA:
                     $token->key = Keys::BRANCH;
+                    $token->value = substr($opcode, 1,2);
                     break;
 
                 case Opcodes::ADD:
                     $token->key = Keys::ADD;
+                    $token->value = substr($opcode, 1,2);
                     break;
                 case Opcodes::SUB:
                     $token->key = Keys::SUB;
+                    $token->value = substr($opcode, 1,2);
                     break;
                 case Opcodes::STA:
                     $token->key = Keys::STORE;
+                    $token->value = substr($opcode, 1,2);
                     break;
                 case Opcodes::LDA:
                     $token->key = Keys::LOAD;
+                    $token->value = substr($opcode, 1,2);
                     break;
                 default:
                     $token->key = Keys::DATA;

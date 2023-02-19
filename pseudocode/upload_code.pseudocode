@@ -1,0 +1,13 @@
+
+
+FUNCTION UploadCode ( STRING code )
+    IF isLoggedIn
+        IF code exists
+            openUploadPopup
+
+    ELSE
+        OpenLoginPage( UploadCode )
+
+END FUNCTION
+
+
