@@ -24,6 +24,11 @@ class Decompiler
     static public $data_start = 65535;
 
 
+    public function queue_size()
+    {
+        return count($this->token_queue);
+    }
+
     //@Description - Pushes a token into the token queue
     public function push_token_to_queue(Token $token): void
     {
@@ -60,10 +65,16 @@ class Decompiler
 
     public static function decompile($data, $magic)
     {
+        $code = "";
+
         Decompiler::$filetype = $magic;
         Helpers::handle_input($data, $magic);
 
         $decompiler = Helpers::get_shared_decompiler();
+
+        $a = $decompiler->queue_size();
+
+        echo "<script>alert(`Queue: $a`)</script>";
 
         while($token = $decompiler->get_from_queue_and_update())
         {            
@@ -73,10 +84,34 @@ class Decompiler
             }
         
             Decompiler::codegen($token);
-            
-            
         }
-        Helpers::print_object(Decompiler::$code);
+
+
+        $inline_css = "";
+        $line_no = -1;
+
+        for ($i=0; $i < count(Decompiler::$code); $i++) { 
+            $elem = Decompiler::$code[$i];
+            
+            
+            if ($elem == CodeKeys::END) 
+            {
+                $inline_css = "";
+                $line_no = -1;
+            }
+
+            $code .= "<label $inline_css line=$line_no>". $elem. "</label><br>";
+
+            if ($elem == CodeKeys::START) 
+            {
+                $inline_css = "class='indent'";
+                $line_no = 0;
+            }
+            
+            
+            if ($line_no >= 0) $line_no++;
+        }
+        return $code;
     }
 
     private static function calc_var(int $i)
@@ -94,40 +129,77 @@ class Decompiler
 
     private static function codegen(Token $token)
     {
+
+        if($token->key == "") return;
+
+        if ( $token->line == 1)
+        {
+            Decompiler::push_to_code(CodeKeys::START);
+        }
+
+        Helpers::print_object(Decompiler::$var);
+
         switch($token->key)
         {
             case Keys::LOAD:
               Decompiler::$accumulator = Decompiler::$var[Decompiler::calc_var($token->value)];
               $acc = Decompiler::$var[Decompiler::calc_var($token->value)];
-              array_push(Decompiler::$code, "acc = $acc");
+              Decompiler::push_to_code("ACC = $acc");
             break;
             case Keys::STORE:
                 $name = Decompiler::$var[Decompiler::calc_var($token->value)];
-                array_push(Decompiler::$code, "$name = acc");
+                Decompiler::push_to_code("$name = ACC");
             break;
-            case Keys::HALT:
-                break;
             case Keys::DATA:
                 $value = intval($token->value);
                 $loc = Decompiler::$var[Decompiler::calc_var($token->line)];
                 array_unshift(Decompiler::$code, "INTEGER $loc = $value");
-                break;
+            break;
 
             case Keys::ADD:
                 $var = Decompiler::$var[Decompiler::calc_var($token->value)];
-                array_push(Decompiler::$code, "acc = acc + $var");
-                break;
+                Decompiler::push_to_code("ACC = ACC + $var");
+            break;
 
             case Keys::SUB:
                 $var = Decompiler::$var[Decompiler::calc_var($token->value)];
-                array_push(Decompiler::$code, "acc = acc - $var");
+                Decompiler::push_to_code("ACC = ACC - $var");
             break;
 
             case Keys::OUTPUT:
-                array_push(Decompiler::$code, "OUTPUT acc");
+                Decompiler::push_to_code("OUTPUT( ACC )");
             break;
 
+            case Keys::INPUT:
+                Decompiler::push_to_code("ACC = USER_INPUT( )");
+                break;
 
+            case Keys::BRANCH:
+
+                $branch_str = "";
+
+                if ($token->Flags & Flags::kPositive)
+                {
+                    $branch_str .= "IF ( ACC > 0 ) THEN ";
+                }
+
+                if ($token->Flags & Flags::kZero)
+                {
+                    $branch_str .= "IF ( ACC == 0 ) THEN ";
+                }
+
+                $branch_str .= "GOTO LINE_".$token->value;
+
+                Decompiler::push_to_code($branch_str);
+                break;
+            case Keys::HALT:
+                Decompiler::push_to_code(CodeKeys::END);
+                break;
         }
+    }
+
+    private static function push_to_code(string $data)
+    {
+        array_push(Decompiler::$code, $data);
     }
 }

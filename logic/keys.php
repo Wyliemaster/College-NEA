@@ -14,3 +14,9 @@ class Keys
 
     const INVALID = "KEY_INVALID";
 }
+
+class CodeKeys
+{
+    const START = "CODE_START";
+    const END = "CODE_END";
+}

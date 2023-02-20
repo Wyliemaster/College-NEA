@@ -103,10 +103,9 @@ class Token
     {
         // Checking if the argument is in the correct format
 
+        if (is_array($instruction) && count($instruction) <= 3 && !empty($instruction)) {
 
-        if (count($instruction) <= 3 && !ctype_digit($instruction[0])) {
-
-            switch ($instruction[0]) {
+            switch (strtoupper($instruction[0])) {
                 case Mnemonic::HLT:
                     $token->key = Keys::HALT;
                     break;
