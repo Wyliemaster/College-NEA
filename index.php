@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,13 +11,17 @@
 
     <link rel="stylesheet" href="frontend/css/main.css">
     <link rel="stylesheet" href="frontend/css/home.css">
-     <script src="./frontend/scripts/main.js"></script>
+    <script src="./frontend/scripts/main.js"></script>
 </head>
+
 <body>
     <div class="global-navbar">
         <div>
             <a href="#" class="global-navbar-item">Home</a>
             <a href="#" class="global-navbar-item">User Content</a>
+        </div>
+        <div class=global-navbar-title>
+            <label>Little Man Computer Decompiler</label>
         </div>
         <div id="global-navbar-account">
             <a href="#" class="global-navbar-item">Login</a>
@@ -25,17 +30,22 @@
     </div>
 
     <div class="main-input-output">
-        <div class="main-input-output-box" contenteditable="true" id="input"> <!--contenteditable allows the user to edit the field-->
-
+        <!--contenteditable allows the user to edit the field-->
+        <div class="main-input-output-box" contenteditable="true" id="input">
+            <label>Input</label>
         </div>
         <div class="main-input-output-buttons">
             <a class="main-input-output-btn" onclick="decompile_assembly()">Decompile</a>
-            <a class="main-input-output-btn" href="">Upload File</a>
+            <input id="upload-file" type="file" style="display:none;"/>
+            <a class="main-input-output-btn" onclick="upload_file()">Upload File</a>
             <a class="main-input-output-btn" href="">Upload Code to Server</a>
         </div>
         <div class="main-input-output-box" id="output">
+            <label>Output</label>
         </div>
 
     </div>
+
 </body>
+
 </html>

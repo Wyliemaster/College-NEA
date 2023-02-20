@@ -100,7 +100,7 @@ class Decompiler
                 $line_no = -1;
             }
 
-            $code .= "<custom $inline_css>".$elem."</custom><br>";
+            $code .= "<custom $inline_css id='$line_no'>".$elem."</custom><br>";
 
             if ($elem == CodeKeys::START) 
             {
@@ -130,13 +130,14 @@ class Decompiler
     private static function codegen(Token $token)
     {
 
-        // if($token->key == "") return;
-
-        if ( $token->line == 1)
+        // Helpers::print_object($token);
+        
+        if ( $token->line == 1 && !empty($token->key))
         {
             Decompiler::push_to_code(CodeKeys::START);
         }
-
+        if($token->key == "") return;
+        
         switch($token->key)
         {
             case Keys::LOAD:
@@ -194,6 +195,7 @@ class Decompiler
                 Decompiler::push_to_code(CodeKeys::END);
                 break;
         }
+        // Helpers::print_object(Decompiler::$code);
     }
 
     private static function push_to_code(string $data)
