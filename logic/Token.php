@@ -93,9 +93,9 @@ class Token
     {
         // Checking if the argument is in the correct format
 
-        
+
         if (count($instruction) <= 3 && !ctype_digit($instruction[0])) {
-            
+
 
 
             switch ($instruction[0]) {
@@ -145,15 +145,12 @@ class Token
                     $token->key = Keys::DATA;
                     $token->value = $instruction[1];
                 default:
-                if ( count ($instruction) === 3 )
-                {
-                    $next = array($instruction[1], $instruction[2]);
-                    $token->data_name = $instruction[0];
-                    Token::tokenise_ins($next, $token);
-                }
-                
-                
-                break;
+                    if (count($instruction) === 3) {
+                        $next = array($instruction[1], $instruction[2]);
+                        $token->data_name = $instruction[0];
+                        Token::tokenise_ins($next, $token);
+                    }
+                    break;
             }
         }
     }

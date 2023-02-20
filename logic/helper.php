@@ -7,12 +7,12 @@ class Helpers
 {
 
     static $decompiler = NULL;
-
-
+    static $file = NULL;
 
 
     public static function handle_input(string $input, string $magic)
     {
+        Helpers::set_file($input);
         if ($magic == "2167") // File
         {
             if (strlen($input) % 3 == 1) {
@@ -73,6 +73,17 @@ class Helpers
         }
 
         return Helpers::$decompiler;
+    }
+
+    static function set_file($file)
+    {
+        Helpers::$file = $file;
+    }
+
+
+    public static function get_file()
+    {
+        return Helpers::$file;
     }
 
     public static function print_object($obj)
