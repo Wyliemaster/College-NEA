@@ -39,19 +39,18 @@ class Helpers
             
             
             for ($i=0; $i < count($lines); $i++) { 
-                $data = array();
-                # code...
 
-                // echo $lines[$i];
+                $data = array();
+
                 preg_match("/\s{0,}(\w+)\s{0,}(\w{0,})\s{0,}(\w{0,})/s", $lines[$i], $data);
 
                 
                 array_shift($data);
-                echo "<pre>", var_dump($data), "</pre>";
                 $token = Token::tokenise($data);
                 
-
-
+                
+                
+                echo "<pre>", var_dump($data), "</pre>";
 
 
                 
