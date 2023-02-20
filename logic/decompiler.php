@@ -7,13 +7,14 @@ class Decompiler
     //@Description - A queue containing all tokens to avoid them being processed in the wrong order
     private $token_queue = [];
 
-    //@Description - Pushes a token into
+    //@Description - Pushes a token into the token queue
     public function push_token_to_queue(Token $token): void
     {
         if ($token instanceof Token)
             array_push($this->token_queue, $token);
     }
 
+    // @Description - Peaks the next item in the queue
     public function peak()
     {
         if (count($this->token_queue) > 0) {
@@ -21,6 +22,8 @@ class Decompiler
         }
     }
 
+    // @Description - Peaks the queue and then removes the
+    // latest element
     public function get_from_queue_and_update()
     {
 
@@ -32,6 +35,8 @@ class Decompiler
         }
     }
 
+    // @Description - Gets the entire token queue
+    // for debugging purposes.
     public function get_queue()
     {
         return $this->token_queue;

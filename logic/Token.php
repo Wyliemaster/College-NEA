@@ -94,7 +94,7 @@ class Token
         // Checking if the argument is in the correct format
 
         
-        if (count($instruction) < 3 && !ctype_digit($instruction[0])) {
+        if (count($instruction) <= 3 && !ctype_digit($instruction[0])) {
             
 
 
@@ -119,42 +119,42 @@ class Token
 
                 case Mnemonic::BRA:
                     $token->key = Keys::BRANCH;
+                    $token->value = $instruction[1];
                     break;
 
                 case Mnemonic::ADD:
                     $token->key = Keys::ADD;
+                    $token->value = $instruction[1];
                     break;
 
                 case Mnemonic::SUB:
                     $token->key = Keys::SUB;
+                    $token->value = $instruction[1];
                     break;
 
                 case Mnemonic::STA:
                     $token->key = Keys::STORE;
+                    $token->value = $instruction[1];
                     break;
 
                 case Mnemonic::LDA:
                     $token->key = Keys::LOAD;
+                    $token->value = $instruction[1];
                     break;
                 case Mnemonic::DAT:
                     $token->key = Keys::DATA;
+                    $token->value = $instruction[1];
                 default:
-                    $token->key = Keys::INVALID;
-                    break;
+                if ( count ($instruction) === 3 )
+                {
+                    $next = array($instruction[1], $instruction[2]);
+                    $token->data_name = $instruction[0];
+                    Token::tokenise_ins($next, $token);
+                }
+                
+                
+                break;
             }
-        } else {
-            $next = array(
-                $instruction[1],
-                $instruction[2],
-            );
-            // echo var_dump($next);
-
-
-            $token->data_name = $instruction[0];
-            Token::tokenise($next, $token);
-
-
-            $token->value = $instruction[1];
         }
     }
 

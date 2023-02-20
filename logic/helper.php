@@ -32,33 +32,36 @@ class Helpers
 
 
 
-        // TODO: fix
         if ($magic == "1530") // Assembly
         {
             $lines =  explode("\n", $input);
-            
-            
-            for ($i=0; $i < count($lines); $i++) { 
+
+            for ($i = 0; $i < count($lines); $i++) {
 
                 $data = array();
 
-                preg_match("/\s{0,}(\w+)\s{0,}(\w{0,})\s{0,}(\w{0,})/s", $lines[$i], $data);
+                /*
+                    This Regex is to fetch each identifier out of the assembly.
+                    It is limited to 3 identifiers per line
 
-                
+                    - \s*(\w+) fetches the first identifer. "+" is used as the first
+                    identifier is required
+
+                    - \s*(\w*) Fetches the second identifier. the "*" makes this 
+                    identifier optional
+
+                    - \s(\w*)\s* Fetches the final identifier and ignores anything
+                    after it spots a whitespace character
+                */
+                preg_match("/\s*(\w+)\s*(\w*)\s*(\w*)\s*/s", $lines[$i], $data);
+
+                // Gets rid of unneeded info provided by regex
                 array_shift($data);
+
+                // Convert the line into tokens
                 $token = Token::tokenise($data);
-                
-                
-                
-                echo "<pre>", var_dump($data), "</pre>";
-
-
-                
-
-                
+                Self::get_shared_decompiler()->push_token_to_queue($token);
             }
-            
-
         }
     }
 
@@ -70,5 +73,10 @@ class Helpers
         }
 
         return Helpers::$decompiler;
+    }
+
+    public static function print_object($obj)
+    {
+        echo "<pre>", var_dump($obj), "</pre>";
     }
 };

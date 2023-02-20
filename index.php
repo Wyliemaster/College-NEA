@@ -11,7 +11,9 @@ foreach($files as $file) {
     Helpers::handle_input($input, "1530");
 }
 
-echo "<pre>",var_dump(Helpers::get_shared_decompiler()->get_queue()),"</pre>";
+Helpers::print_object(Helpers::get_shared_decompiler()->get_queue());
+
+// echo "<pre>",var_dump(Helpers::get_shared_decompiler()->get_queue()),"</pre>";
 
 
 
