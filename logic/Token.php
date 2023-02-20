@@ -21,6 +21,10 @@ class Token
     // @Description - Name for data variable if the instruction is DAT
     public $data_name = NULL;
 
+    // @type int
+    // description - Line that token represents
+    public $line = -1;
+
 
     private static function Tokenise_bin(string $opcode, Token $token): void
     {
@@ -40,6 +44,9 @@ class Token
                     // this line is to account for it
                     $token->key = Keys::DATA;
                     $token->value = $opcode;
+
+                    $index = count(Decompiler::$var);
+                    array_push(Decompiler::$var, "v$index");   
                     break;
 
                     // User input and output are complicated so using keys for them
@@ -83,6 +90,9 @@ class Token
                 default:
                     $token->key = Keys::DATA;
                     $token->value = $opcode;
+
+                    $index = count(Decompiler::$var);
+                    array_push(Decompiler::$var, "v$index");   
                     break;
             }
         }
@@ -95,6 +105,7 @@ class Token
 
 
         if (count($instruction) <= 3 && !ctype_digit($instruction[0])) {
+
             switch ($instruction[0]) {
                 case Mnemonic::HLT:
                     $token->key = Keys::HALT;
@@ -141,6 +152,8 @@ class Token
                 case Mnemonic::DAT:
                     $token->key = Keys::DATA;
                     $token->value = $instruction[1];
+                    array_push(Decompiler::$var, $token->data_name);
+                    break;
                 default:
                     if (count($instruction) === 3) {
                         $next = array($instruction[1], $instruction[2]);

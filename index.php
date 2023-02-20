@@ -1,16 +1,15 @@
 <?php
 include "logic/helper.php";
 
-$files = glob('TestData/LMC_ALPHABET.s');
+$files = glob('TestData/LMC_ALPHABET.bin');
 foreach($files as $file) {
 
     $data = fopen($file, "r");
 
-    $input = fread($data, filesize($file))."<br>";
+    $input = fread($data, filesize($file));
 
-    Helpers::handle_input($input, "1530");
+    Decompiler::decompile($input, FileMagic::MACHINE_CODE);
 
-   echo Helpers::find_line_for_identifer("ONE");
 }
 
 

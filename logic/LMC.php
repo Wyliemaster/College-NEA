@@ -34,6 +34,12 @@ class Mnemonic
     const DAT = "DAT";
 };
 
+class FileMagic
+{
+    const ASSEMBLY = "1530";
+    const MACHINE_CODE = "2167";
+}
+
 class Flags
 {
     // enums don't allow chosing the number in php for some reason

@@ -13,15 +13,24 @@ class Helpers
     public static function handle_input(string $input, string $magic)
     {
         Helpers::set_file($input);
-        if ($magic == "2167") // File
+        if ($magic == FileMagic::MACHINE_CODE)
         {
-            if (strlen($input) % 3 == 1) {
+            // Each instruction in LMC is a 3 digit decimal number.
+            // We can not analyse it if it does not allign
+            if (strlen($input) % 3 == 0) {
                 $data = str_split($input, 3);
 
                 $total_instructions = count($data);
 
                 for ($i = 0; $i < $total_instructions; $i++) {
                     $token = Token::tokenise($data[$i]);
+                    $token->line = $i + 1;
+
+                    // echo $token->line, "<br>", Decompiler::$data_start, "<br>";
+
+                    if ($token->line < Decompiler::$data_start && $token->key === Keys::DATA)
+                        Decompiler::$data_start = $token->line;
+
 
                     Self::get_shared_decompiler()->push_token_to_queue($token);
                 }
@@ -30,9 +39,7 @@ class Helpers
             }
         }
 
-
-
-        if ($magic == "1530") // Assembly
+        if ($magic == FileMagic::ASSEMBLY)
         {
             $lines =  explode("\n", $input);
 
@@ -60,6 +67,11 @@ class Helpers
 
                 // Convert the line into tokens
                 $token = Token::tokenise($data);
+                $token->line = $i + 1;
+
+                if ($token->line < Decompiler::$data_start && $token->key === Keys::DATA)
+                Decompiler::$data_start = $token->line;
+
                 Self::get_shared_decompiler()->push_token_to_queue($token);
             }
         }
@@ -86,12 +98,12 @@ class Helpers
         return Helpers::$file;
     }
 
-    public static function find_line_for_identifer($identifier): int|string
+    public static function find_line_for_identifer(string $identifier): int|string
     {
         $file = Helpers::get_file();
 
-        // can't do anything if theres no file
-        if ($file === NULL) return Keys::INVALID;
+        // can't do anything if theres no file or input
+        if ($file === NULL || empty($identifier)) return Keys::INVALID;
 
         $lines = explode("\n", $file);
 
@@ -112,9 +124,42 @@ class Helpers
         return Keys::INVALID;
     }
 
+    public static function get_line(int $line_no)
+    {
+        $file = Helpers::get_file();
+
+        // can't do anything if theres no file or input
+        if ($file === NULL || !is_numeric($line_no)) return Keys::INVALID;
+
+        $lines = explode("\n", $file);
+
+        $data = [];
+
+        if ( count($lines) < $line_no ) return Keys::INVALID;
+
+
+        /*
+            This Regex is to fetch each identifier out of the assembly.
+            It is limited to 3 identifiers per line
+
+            - \s*(\w+) fetches the first identifer. "+" is used as the first
+            identifier is required
+
+            - \s*(\w*) Fetches the second identifier. the "*" makes this 
+            identifier optional
+
+            - \s(\w*)\s* Fetches the final identifier and ignores anything
+            after it spots a whitespace character
+        */
+        preg_match("/\s*(\w+)\s*(\w*)\s*(\w*)\s*/s", $lines[$line_no - 1], $data);
+        array_shift($data);
+        
+        return $data;
+    }
     // @Description - Print Objects for debug purposes
     public static function print_object($obj)
     {
         echo "<pre>", var_dump($obj), "</pre>";
     }
+
 };
