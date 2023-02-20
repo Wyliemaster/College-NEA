@@ -95,7 +95,7 @@ class Helpers
 
         $lines = explode("\n", $file);
 
-        for ($i=0; $i < count($lines); $i++) { 
+        for ($i = 0; $i < count($lines); $i++) {
             /*
                 This fetches an identifier at the start of
                 a line and if it exists, it returns line number
@@ -105,14 +105,14 @@ class Helpers
                 the one that we want
 
             */
-            if(preg_match("/^\s*(".$identifier.")/", $lines[$i]))
-            {
+            if (preg_match("/^\s*(" . $identifier . ")/", $lines[$i])) {
                 return $i + 1;
             }
         }
         return Keys::INVALID;
     }
 
+    // @Description - Print Objects for debug purposes
     public static function print_object($obj)
     {
         echo "<pre>", var_dump($obj), "</pre>";

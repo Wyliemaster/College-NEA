@@ -95,9 +95,6 @@ class Token
 
 
         if (count($instruction) <= 3 && !ctype_digit($instruction[0])) {
-
-
-
             switch ($instruction[0]) {
                 case Mnemonic::HLT:
                     $token->key = Keys::HALT;

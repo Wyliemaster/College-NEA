@@ -1,5 +1,6 @@
 <?php
-class Opcodes {
+class Opcodes
+{
     const HLT = 0;
 
     const ADD = 1;
