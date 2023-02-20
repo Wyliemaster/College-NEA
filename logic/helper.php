@@ -86,6 +86,33 @@ class Helpers
         return Helpers::$file;
     }
 
+    public static function find_line_for_identifer($identifier): int|string
+    {
+        $file = Helpers::get_file();
+
+        // can't do anything if theres no file
+        if ($file === NULL) return Keys::INVALID;
+
+        $lines = explode("\n", $file);
+
+        for ($i=0; $i < count($lines); $i++) { 
+            /*
+                This fetches an identifier at the start of
+                a line and if it exists, it returns line number
+
+                - ^\s* ignore potential whitespace at the start
+                - ($identifier) Check if first identifier matches
+                the one that we want
+
+            */
+            if(preg_match("/^\s*(".$identifier.")/", $lines[$i]))
+            {
+                return $i + 1;
+            }
+        }
+        return Keys::INVALID;
+    }
+
     public static function print_object($obj)
     {
         echo "<pre>", var_dump($obj), "</pre>";

@@ -9,9 +9,10 @@ foreach($files as $file) {
     $input = fread($data, filesize($file))."<br>";
 
     Helpers::handle_input($input, "1530");
+
+   echo Helpers::find_line_for_identifer("ONE");
 }
 
-Helpers::print_object(Helpers::get_shared_decompiler()->get_queue());
 
 // echo "<pre>",var_dump(Helpers::get_shared_decompiler()->get_queue()),"</pre>";
 
