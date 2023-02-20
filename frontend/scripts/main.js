@@ -14,13 +14,6 @@ async function decompile_assembly()
 
     let text =  await response.text();
 
-    if (text == -1)
-    {
-
-        document.getElementById("output").innerHTML = "DECOMPILATION ERROR";
-        return;
-    }
-
     document.getElementById("output").innerHTML = text;
 
 

@@ -1,7 +1,7 @@
 <?php
 include_once "decompiler.php";
 require_once "Token.php";
-
+error_reporting(0);
 
 class Helpers
 {

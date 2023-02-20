@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require_once "Token.php";
 
 class Decompiler
@@ -74,7 +75,6 @@ class Decompiler
 
         $a = $decompiler->queue_size();
 
-        echo "<script>alert(`Queue: $a`)</script>";
 
         while($token = $decompiler->get_from_queue_and_update())
         {            
@@ -100,7 +100,7 @@ class Decompiler
                 $line_no = -1;
             }
 
-            $code .= "<label $inline_css line=$line_no>". $elem. "</label><br>";
+            $code .= "<custom $inline_css>".$elem."</custom><br>";
 
             if ($elem == CodeKeys::START) 
             {
@@ -130,14 +130,12 @@ class Decompiler
     private static function codegen(Token $token)
     {
 
-        if($token->key == "") return;
+        // if($token->key == "") return;
 
         if ( $token->line == 1)
         {
             Decompiler::push_to_code(CodeKeys::START);
         }
-
-        Helpers::print_object(Decompiler::$var);
 
         switch($token->key)
         {
@@ -158,12 +156,12 @@ class Decompiler
 
             case Keys::ADD:
                 $var = Decompiler::$var[Decompiler::calc_var($token->value)];
-                Decompiler::push_to_code("ACC = ACC + $var");
+                Decompiler::push_to_code("ACC += $var");
             break;
 
             case Keys::SUB:
                 $var = Decompiler::$var[Decompiler::calc_var($token->value)];
-                Decompiler::push_to_code("ACC = ACC - $var");
+                Decompiler::push_to_code("ACC -= $var");
             break;
 
             case Keys::OUTPUT:

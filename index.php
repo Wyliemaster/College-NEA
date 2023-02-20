@@ -1,4 +1,5 @@
-<!-- The actual Index page is being used for testing so this one is being used for design mockups-->
+<?php error_reporting(0); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

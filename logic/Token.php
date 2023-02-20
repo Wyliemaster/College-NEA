@@ -1,7 +1,7 @@
 <?php
 include_once "LMC.php";
 include_once "keys.php";
-
+error_reporting(0);
 // @Description - Object to handle tokens
 class Token
 {
