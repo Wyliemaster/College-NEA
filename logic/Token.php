@@ -61,24 +61,24 @@ class Token
                     $token->Flags |= Flags::kPositive;
                 case Opcodes::BRA:
                     $token->key = Keys::BRANCH;
-                    $token->value = substr($opcode, 1,2);
+                    $token->value = substr($opcode, 1, 2);
                     break;
 
                 case Opcodes::ADD:
                     $token->key = Keys::ADD;
-                    $token->value = substr($opcode, 1,2);
+                    $token->value = substr($opcode, 1, 2);
                     break;
                 case Opcodes::SUB:
                     $token->key = Keys::SUB;
-                    $token->value = substr($opcode, 1,2);
+                    $token->value = substr($opcode, 1, 2);
                     break;
                 case Opcodes::STA:
                     $token->key = Keys::STORE;
-                    $token->value = substr($opcode, 1,2);
+                    $token->value = substr($opcode, 1, 2);
                     break;
                 case Opcodes::LDA:
                     $token->key = Keys::LOAD;
-                    $token->value = substr($opcode, 1,2);
+                    $token->value = substr($opcode, 1, 2);
                     break;
                 default:
                     $token->key = Keys::DATA;
@@ -92,7 +92,12 @@ class Token
     private static function tokenise_ins(array $instruction, Token $token): void
     {
         // Checking if the argument is in the correct format
-        if (count($instruction) < 3 && !ctype_digit($instruction[0]) && strlen($instruction[0]) == 3) {
+
+        
+        if (count($instruction) < 3 && !ctype_digit($instruction[0])) {
+            
+
+
             switch ($instruction[0]) {
                 case Mnemonic::HLT:
                     $token->key = Keys::HALT;
@@ -131,33 +136,37 @@ class Token
                 case Mnemonic::LDA:
                     $token->key = Keys::LOAD;
                     break;
-
-
+                case Mnemonic::DAT:
+                    $token->key = Keys::DATA;
                 default:
                     $token->key = Keys::INVALID;
                     break;
             }
-            $token->value = $instruction[1];
         } else {
-            if ($instruction[1] == Mnemonic::DAT) {
-                $token->data_name = $instruction[0];
-                $token->key = Keys::DATA;
-                $token->value = $instruction[2];
-            }
+            $next = array(
+                $instruction[1],
+                $instruction[2],
+            );
+            // echo var_dump($next);
+
+
+            $token->data_name = $instruction[0];
+            Token::tokenise($next, $token);
+
+
+            $token->value = $instruction[1];
         }
     }
 
     public static function tokenise($instruction): Token
     {
-
         $token = new Token();
 
 
-        if (!is_array($instruction))
-            Self::Tokenise_bin($instruction, $token);
-
-        else
+        if (is_array($instruction))
             Self::tokenise_ins($instruction, $token);
+        else
+            Self::Tokenise_bin($instruction, $token);
 
         return $token;
     }

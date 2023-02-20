@@ -5,7 +5,11 @@ require_once "Token.php";
 
 class Helpers
 {
+
     static $decompiler = NULL;
+
+
+
 
     public static function handle_input(string $input, string $magic)
     {
@@ -26,8 +30,36 @@ class Helpers
             }
         }
 
+
+
+        // TODO: fix
         if ($magic == "1530") // Assembly
         {
+            $lines =  explode("\n", $input);
+            
+            
+            for ($i=0; $i < count($lines); $i++) { 
+                $data = array();
+                # code...
+
+                // echo $lines[$i];
+                preg_match("/\s{0,}(\w+)\s{0,}(\w{0,})\s{0,}(\w{0,})/s", $lines[$i], $data);
+
+                
+                array_shift($data);
+                echo "<pre>", var_dump($data), "</pre>";
+                $token = Token::tokenise($data);
+                
+
+
+
+
+                
+
+                
+            }
+            
+
         }
     }
 
