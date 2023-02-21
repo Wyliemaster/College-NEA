@@ -168,7 +168,6 @@ class Token
     {
         $token = new Token();
 
-
         if (is_array($instruction))
             Self::tokenise_ins($instruction, $token);
         else

@@ -36,8 +36,10 @@
         </div>
         <div class="main-input-output-buttons">
             <a class="main-input-output-btn" onclick="decompile_assembly()">Decompile</a>
-            <input id="upload-file" type="file" style="display:none;"/>
+
+            <input id="upload-file" type="file" style="display:none;" />
             <a class="main-input-output-btn" onclick="upload_file()">Upload File</a>
+
             <a class="main-input-output-btn" href="">Upload Code to Server</a>
         </div>
         <div class="main-input-output-box" id="output">
