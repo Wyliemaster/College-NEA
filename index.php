@@ -15,7 +15,7 @@
     <script src="./frontend/scripts/prefab.js"></script>
     <script src="./frontend/scripts/helpers.js"></script>
 
-    
+
 </head>
 
 <body>
@@ -27,13 +27,27 @@
         <div class=global-navbar-title>
             <label>Little Man Computer Decompiler</label>
         </div>
-        <div id="global-navbar-account">
-            <a href="#" class="global-navbar-item">Login</a>
-            <a onclick="show_register_popup();" class="global-navbar-item">Register</a>
-        </div>
+
+        <?php
+
+        if (!isset($_COOKIE["LOGIN"]) && !isset($_COOKIE["NAME"])) {
+            echo '<div id="global-navbar-account">
+                <a onclick="show_login_popup()" class="global-navbar-item">Login</a>
+                <a onclick="show_register_popup();" class="global-navbar-item">Register</a>
+            </div>';
+        } else {
+            $name = $_COOKIE["NAME"] ? $_COOKIE["NAME"] : "[[NAME]]";
+            echo '<div id="global-navbar-account">
+            <a onclick="#" class="global-navbar-item">' . $name . '\'s Code</a>
+            <a onclick="#" class="global-navbar-item">Logout</a>
+        </div>';
+        }
+
+        ?>
+
     </div>
 
-    <div id="test"></div>
+    <div id="Prefabs"></div>
 
 
     <div class="main-input-output">
@@ -55,19 +69,9 @@
 
     </div>
 
-
-
     <script>
-        // For testing purposes
-        add_prefab("popup", "test", {
-            "[[POPUP_TITLE]]": "Title",
-            "[[POPUP_DESC]]": "Desc",
-            "[[POPUP_CONTAINER]]": "Container"
-        });
-
-
+        load_main_page_prefabs()
     </script>
-
 
 </body>
 
