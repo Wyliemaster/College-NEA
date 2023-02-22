@@ -10,7 +10,7 @@
     <title>Home</title>
 
     <link rel="stylesheet" href="../frontend/css/main.css">
-    <link rel="stylesheet" href="../frontend/css/home.css">
+    <link rel="stylesheet" href="../frontend/css/user.css">
     <script src="../frontend/scripts/main.js"></script>
     <script src="../frontend/scripts/prefab.js"></script>
     <script src="../frontend/scripts/helpers.js"></script>
@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body style="overflow-y: auto">
     <div class="global-navbar">
         <div>
             <a href="../" class="global-navbar-item">Home</a>
@@ -47,7 +47,29 @@
 
     </div>
 
+    
+    <label class="user-filter-title">sort by</label>
+    <div class="user-filters">
+        <div class="user-filter-btn">filter</div>        
+        <div class="user-filter-btn">filter</div>        
+        <div class="user-filter-btn">filter</div>        
+        <div class="user-filter-btn">filter</div>        
+    </div>
 
+    <div class="user-content-container">
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+        <div class="user-content-btn">btn</div>
+    </div>
     <script>
         load_main_page_prefabs()
     </script>

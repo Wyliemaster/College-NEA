@@ -21,8 +21,8 @@
 <body>
     <div class="global-navbar">
         <div>
-            <a href="#" class="global-navbar-item">Home</a>
-            <a href="#" class="global-navbar-item">User Content</a>
+            <a href="./" class="global-navbar-item">Home</a>
+            <a href="./user_content/" class="global-navbar-item">User Content</a>
         </div>
         <div class=global-navbar-title>
             <label>Little Man Computer Decompiler</label>
@@ -38,8 +38,8 @@
         } else {
             $name = $_COOKIE["NAME"] != "" ? $_COOKIE["NAME"] : "[[NAME]]";
             echo '<div id="global-navbar-account">
-            <a onclick="#" class="global-navbar-item">' . $name . '\'s Code</a>
-            <a onclick="#" class="global-navbar-item">Logout</a>
+            <a onclick="show_login_popup()" class="global-navbar-item">' . $name . '\'s Code</a>
+            <a onclick="logout()" class="global-navbar-item">Logout</a>
         </div>';
         }
 
