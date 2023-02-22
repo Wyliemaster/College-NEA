@@ -36,7 +36,7 @@
                 <a onclick="show_register_popup();" class="global-navbar-item">Register</a>
             </div>';
         } else {
-            $name = $_COOKIE["NAME"] ? $_COOKIE["NAME"] : "[[NAME]]";
+            $name = $_COOKIE["NAME"] != "" ? $_COOKIE["NAME"] : "[[NAME]]";
             echo '<div id="global-navbar-account">
             <a onclick="#" class="global-navbar-item">' . $name . '\'s Code</a>
             <a onclick="#" class="global-navbar-item">Logout</a>
