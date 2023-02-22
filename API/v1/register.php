@@ -2,8 +2,8 @@
 require "../../logic/database.php";
 $time = time();
 
-$name = clean($_GET["uname"]);
-$pass = $_GET["pass"];
+$name = clean($_POST["uname"]);
+$pass = $_POST["pass"];
 
 if (!empty($name) && !empty($pass))
 {
@@ -31,7 +31,7 @@ if (!empty($name) && !empty($pass))
 
             if($query->execute([":name" => $name, ":pass" => $password, ":time" => $time]))
             {
-                setcookie("LOGIN", sha1($_GET["uname"] . strval($time) ), $time + (86400 * 30), "/");
+                setcookie("LOGIN", sha1($_POST["uname"] . strval($time) ), $time + (86400 * 30), "/");
                 setcookie("NAME", $name, $time + (86400 * 30), "/");
 
                 $db = NULL;

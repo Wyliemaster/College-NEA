@@ -9,7 +9,7 @@ function show_login_popup() {
   }
 
 function load_main_page_prefabs() {
-  let register = `<form action="./API/v1/register.php">
+  let register = `<form action="./API/v1/register.php"  method="post">
     <label for="uname">Username</label><br>
     <input type="text" id="uname" name="uname" placeholder="user123..."><br>
     <label for="pass">Password</label><br>
@@ -17,13 +17,16 @@ function load_main_page_prefabs() {
     <input type="submit" value="Submit">
   </form> `;
 
-  let login = `<form action="./API/v1/login.php">
+  let login = `<form action="./API/v1/login.php"  method="post">
     <label for="uname">Username</label><br>
     <input type="text" id="uname" name="uname" placeholder="user123..."><br>
     <label for="pass">Password</label><br>
     <input type="password" id="pass" name="pass" placeholder="**********"><br><br>
     <input type="submit" value="Submit">
   </form> `;
+
+
+
 
 
   add_prefab("popup", "Prefabs", {
@@ -37,4 +40,11 @@ function load_main_page_prefabs() {
     "[[POPUP_DESC]]": "Use this form to Login to your account",
     "[[POPUP_CONTAINER]]": login,
   }, 1);
+}
+
+
+async function logout()
+{
+    await fetch(`./API/v1/logout.php`);
+    location.reload();
 }

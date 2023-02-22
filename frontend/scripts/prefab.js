@@ -25,9 +25,7 @@ async function add_prefab(name, parent, settings, id = prefab_index++)
     if (prefab != null)
     {
 
-        for (const key in settings) {
-            console.log(key, settings[key])
-            
+        for (const key in settings) {            
             prefab = prefab.replace(key, settings[key]);
         }
         
