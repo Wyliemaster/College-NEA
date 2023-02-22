@@ -53,7 +53,9 @@
     <div class="main-input-output">
         <!--contenteditable allows the user to edit the field-->
         <div class="main-input-output-box" contenteditable="true" id="input">
-            <label>Input</label>
+            <?php
+                echo $_GET["default"] ? $_GET["default"] : "Input";
+            ?>
         </div>
         <div class="main-input-output-buttons">
             <a class="main-input-output-btn" onclick="decompile_assembly()">Decompile</a>
@@ -64,7 +66,7 @@
             <a class="main-input-output-btn" href="">Upload Code to Server</a>
         </div>
         <div class="main-input-output-box" id="output">
-            <label>Output</label>
+            Output
         </div>
 
     </div>

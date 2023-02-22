@@ -39,6 +39,8 @@ function show_prefab_element(element_name)
 {
     prefab = document.getElementById(`prefab-${element_name}`);
 
+    console.log(prefab);
+
     prefab.style.scale = 1;
     prefab.style.visibility = "visible";
 }

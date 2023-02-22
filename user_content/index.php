@@ -1,4 +1,4 @@
-<?php error_reporting(0); $me = $_GET["myCode"];?>
+<?php error_reporting(0); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +14,7 @@
     <script src="./../frontend/scripts/main.js"></script>
     <script src="./../frontend/scripts/prefab.js"></script>
     <script src="./../frontend/scripts/helpers.js"></script>
+    <script src="./../frontend/scripts/user.js"></script>
 
 
 </head>
@@ -28,7 +29,7 @@
             <label>Little Man Computer Decompiler</label>
         </div>
 
-        
+
         <?php
 
         if (!isset($_COOKIE["LOGIN"]) && !isset($_COOKIE["NAME"])) {
@@ -49,37 +50,38 @@
     </div>
     <div id="Prefabs"></div>
 
-    
+
+
     <label class="user-filter-title">sort by</label>
     <div class="user-filters">
-        <div class="user-filter-btn">filter</div>        
-        <div class="user-filter-btn">filter</div>        
-        <div class="user-filter-btn">filter</div>        
-        <div class="user-filter-btn">filter</div>        
+        <div class="user-filter-btn">filter</div>
+        <div class="user-filter-btn">filter</div>
+        <div class="user-filter-btn">filter</div>
+        <div class="user-filter-btn">filter</div>
     </div>
 
     <?php
-    include "./API/v1/content.php";
-       if ($me === $_COOKIE["LOGIN"])
-       {
-       }
+    // save filter state
+    if ($_GET["myCode"] === $_COOKIE["LOGIN"]) {
+        $filter = 5;
+    } else {
+        if ($_COOKIE["CONTENT"]) {
+            $filter = $_COOKIE["CONTENT"];
+        } else {
+            $filter = 1;
+        }
+    }
+
+    setcookie("CONTENT", $filter, time() + (86400 * 30), "/");
+
+    // first load 
+    echo "<script>get_content($filter)</script>";
     ?>
 
 
-    <div class="user-content-container">
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
-        <a class="user-content-btn">btn</a>
+    <div id="user-content-container"></div>
 
-    </div>
+    <div id="details_prefab"></div>
     <script>
         load_content_page_prefabs();
     </script>
