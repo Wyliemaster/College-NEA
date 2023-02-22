@@ -41,19 +41,17 @@
     #prefab-popup-container-[[PREFAB_ID]] {
       width: inherit;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-evenly;
       flex-grow: 1;
     }
 
     #prefab-popup-title-[[PREFAB_ID]] {
       font-size: xx-large;
-      flex-grow: 1;
     }
 
     #prefab-popup-description-[[PREFAB_ID]] {
       font-size: large;
-      flex-grow: 1;
     }
   </style>
 
