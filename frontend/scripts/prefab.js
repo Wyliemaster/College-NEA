@@ -1,9 +1,9 @@
 let prefab_index = 0;
 
 // Fetches the prefab and converts it to a usable format
-async function fetch_prefab(name, id)
+async function fetch_prefab(name, id, start)
 {
-    const response = await fetch(`./frontend/prefab/${name}.prefab`);
+    const response = await fetch(`./${start}frontend/prefab/${name}.prefab`);
 
     if (response.status != 200) return null;
 
@@ -20,9 +20,9 @@ async function fetch_prefab(name, id)
  @settings - Object containing replacements to default variables
  @id - unique ID for prefab
 */
-async function add_prefab(name, parent, settings, id = prefab_index++)
+async function add_prefab(name, parent, settings, id = prefab_index++, start = "")
 {
-    let prefab = await fetch_prefab(name, id);
+    let prefab = await fetch_prefab(name, id, start);
 
     if (prefab != null)
     {

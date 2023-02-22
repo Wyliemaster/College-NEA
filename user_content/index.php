@@ -1,4 +1,4 @@
-<?php error_reporting(0); ?>
+<?php error_reporting(0); $me = $_GET["myCode"];?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +11,9 @@
 
     <link rel="stylesheet" href="../frontend/css/main.css">
     <link rel="stylesheet" href="../frontend/css/user.css">
-    <script src="../frontend/scripts/main.js"></script>
-    <script src="../frontend/scripts/prefab.js"></script>
-    <script src="../frontend/scripts/helpers.js"></script>
+    <script src="./../frontend/scripts/main.js"></script>
+    <script src="./../frontend/scripts/prefab.js"></script>
+    <script src="./../frontend/scripts/helpers.js"></script>
 
 
 </head>
@@ -28,6 +28,7 @@
             <label>Little Man Computer Decompiler</label>
         </div>
 
+        
         <?php
 
         if (!isset($_COOKIE["LOGIN"]) && !isset($_COOKIE["NAME"])) {
@@ -38,14 +39,15 @@
         } else {
             $name = $_COOKIE["NAME"] != "" ? $_COOKIE["NAME"] : "[[NAME]]";
             echo '<div id="global-navbar-account">
-            <a onclick="show_login_popup()" class="global-navbar-item">' . $name . '\'s Code</a>
-            <a onclick="logout()" class="global-navbar-item">Logout</a>
+            <a class="global-navbar-item">' . $name . '\'s Code</a>
+            <a onclick="logout(`../`)" class="global-navbar-item">Logout</a>
         </div>';
         }
 
         ?>
 
     </div>
+    <div id="Prefabs"></div>
 
     
     <label class="user-filter-title">sort by</label>
@@ -56,22 +58,30 @@
         <div class="user-filter-btn">filter</div>        
     </div>
 
-    <div class="user-content-container">
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-        <div class="user-content-btn">btn</div>
-    </div>
+    <?php
+    include "./API/v1/content.php";
+       if ($me === $_COOKIE["LOGIN"])
+       {
+       }
+    ?>
+
+
+    <!-- <div class="user-content-container">
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+        <a class="user-content-btn">btn</a>
+
+    </div> -->
     <script>
-        load_main_page_prefabs()
+        load_content_page_prefabs();
     </script>
 
 </body>
