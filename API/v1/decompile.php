@@ -12,4 +12,3 @@ if (!empty($file) && ( $type == FileMagic::ASSEMBLY || $type == FileMagic::MACHI
 }
 
 echo V1Errors::GENERIC;
-?>

@@ -18,8 +18,7 @@ class Helpers
     public static function handle_input(string $input, string $magic)
     {
         Helpers::set_file($input);
-        if ($magic == FileMagic::MACHINE_CODE)
-        {
+        if ($magic == FileMagic::MACHINE_CODE) {
             // Each instruction in LMC is a 3 digit decimal number.
             // We can not analyse it if it does not allign
             if (strlen($input) % 3 == 0) {
@@ -42,8 +41,7 @@ class Helpers
             }
         }
 
-        if ($magic == FileMagic::ASSEMBLY)
-        {
+        if ($magic == FileMagic::ASSEMBLY) {
             $lines =  explode("\n", $input);
 
             for ($i = 0; $i < count($lines); $i++) {
@@ -73,7 +71,7 @@ class Helpers
                 $token->line = $i + 1;
 
                 if ($token->line < Decompiler::$data_start && $token->key === Keys::DATA)
-                Decompiler::$data_start = $token->line;
+                    Decompiler::$data_start = $token->line;
 
                 Self::get_shared_decompiler()->push_token_to_queue($token);
             }
@@ -141,7 +139,7 @@ class Helpers
 
         $data = [];
 
-        if ( count($lines) < $line_no ) return Keys::INVALID;
+        if (count($lines) < $line_no) return Keys::INVALID;
 
 
         /*
@@ -159,7 +157,7 @@ class Helpers
         */
         preg_match("/\s*(\w+)\s*(\w*)\s*(\w*)\s*/s", $lines[$line_no - 1], $data);
         array_shift($data);
-        
+
         return $data;
     }
     // @Description - Print Objects for debug purposes
@@ -167,5 +165,4 @@ class Helpers
     {
         echo "<pre>", var_dump($obj), "</pre>";
     }
-
 };

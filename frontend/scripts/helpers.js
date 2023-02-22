@@ -4,9 +4,9 @@ function show_register_popup() {
 }
 
 function show_login_popup() {
-    show_prefab_element("popup-background-1");
-    show_prefab_element("popup-1");
-  }
+  show_prefab_element("popup-background-1");
+  show_prefab_element("popup-1");
+}
 
 function load_main_page_prefabs() {
   let register = `<form action="./API/v1/register.php"  method="post">
@@ -25,57 +25,72 @@ function load_main_page_prefabs() {
     <input type="submit" value="Submit">
   </form> `;
 
-  add_prefab("popup", "Prefabs", {
-    "[[POPUP_TITLE]]": "Register",
-    "[[POPUP_DESC]]": "Use this form to create an account",
-    "[[POPUP_CONTAINER]]": register,
-  }, 0);
-
-  add_prefab("popup", "Prefabs", {
-    "[[POPUP_TITLE]]": "Login",
-    "[[POPUP_DESC]]": "Use this form to Login to your account",
-    "[[POPUP_CONTAINER]]": login,
-  }, 1);
-}
-
-function load_content_page_prefabs() {
-    let register = `<form action="../API/v1/register.php"  method="post">
-      <label for="uname">Username</label><br>
-      <input type="text" id="uname" name="uname" placeholder="user123..."><br>
-      <label for="pass">Password</label><br>
-      <input type="password" id="pass" name="pass" placeholder="**********"><br><br>
-      <input type="submit" value="Submit">
-    </form> `;
-  
-    let login = `<form action="../API/v1/login.php"  method="post">
-      <label for="uname">Username</label><br>
-      <input type="text" id="uname" name="uname" placeholder="user123..."><br>
-      <label for="pass">Password</label><br>
-      <input type="password" id="pass" name="pass" placeholder="**********"><br><br>
-      <input type="submit" value="Submit">
-    </form> `;
-  
-  
-  
-  
-  
-    add_prefab("popup", "Prefabs", {
+  add_prefab(
+    "popup",
+    "Prefabs",
+    {
       "[[POPUP_TITLE]]": "Register",
       "[[POPUP_DESC]]": "Use this form to create an account",
       "[[POPUP_CONTAINER]]": register,
-    }, 0, "../");
-  
-    add_prefab("popup", "Prefabs", {
+    },
+    0
+  );
+
+  add_prefab(
+    "popup",
+    "Prefabs",
+    {
       "[[POPUP_TITLE]]": "Login",
       "[[POPUP_DESC]]": "Use this form to Login to your account",
       "[[POPUP_CONTAINER]]": login,
-    },1, "../");
-  }
-
-
-async function logout(start = "")
-{
-    await fetch(`${start}./API/v1/logout.php`);
-    location.reload();
+    },
+    1
+  );
 }
 
+function load_content_page_prefabs() {
+  let register = `<form action="../API/v1/register.php"  method="post">
+      <label for="uname">Username</label><br>
+      <input type="text" id="uname" name="uname" placeholder="user123..."><br>
+      <label for="pass">Password</label><br>
+      <input type="password" id="pass" name="pass" placeholder="**********"><br><br>
+      <input type="submit" value="Submit">
+    </form> `;
+
+  let login = `<form action="../API/v1/login.php"  method="post">
+      <label for="uname">Username</label><br>
+      <input type="text" id="uname" name="uname" placeholder="user123..."><br>
+      <label for="pass">Password</label><br>
+      <input type="password" id="pass" name="pass" placeholder="**********"><br><br>
+      <input type="submit" value="Submit">
+    </form> `;
+
+  add_prefab(
+    "popup",
+    "Prefabs",
+    {
+      "[[POPUP_TITLE]]": "Register",
+      "[[POPUP_DESC]]": "Use this form to create an account",
+      "[[POPUP_CONTAINER]]": register,
+    },
+    0,
+    "../"
+  );
+
+  add_prefab(
+    "popup",
+    "Prefabs",
+    {
+      "[[POPUP_TITLE]]": "Login",
+      "[[POPUP_DESC]]": "Use this form to Login to your account",
+      "[[POPUP_CONTAINER]]": login,
+    },
+    1,
+    "../"
+  );
+}
+
+async function logout(start = "") {
+  await fetch(`${start}./API/v1/logout.php`);
+  location.reload();
+}

@@ -46,7 +46,7 @@ class Token
                     $token->value = $opcode;
 
                     $index = count(Decompiler::$var);
-                    array_push(Decompiler::$var, "v$index");   
+                    array_push(Decompiler::$var, "v$index");
                     break;
 
                     // User input and output are complicated so using keys for them
@@ -92,7 +92,7 @@ class Token
                     $token->value = $opcode;
 
                     $index = count(Decompiler::$var);
-                    array_push(Decompiler::$var, "v$index");   
+                    array_push(Decompiler::$var, "v$index");
                     break;
             }
         }

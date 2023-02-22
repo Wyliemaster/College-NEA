@@ -1,15 +1,14 @@
 let prefab_index = 0;
 
 // Fetches the prefab and converts it to a usable format
-async function fetch_prefab(name, id, start)
-{
-    const response = await fetch(`./${start}frontend/prefab/${name}.prefab`);
+async function fetch_prefab(name, id, start) {
+  const response = await fetch(`./${start}frontend/prefab/${name}.prefab`);
 
-    if (response.status != 200) return null;
+  if (response.status != 200) return null;
 
-    let data = await response.text();
+  let data = await response.text();
 
-    return data.replace(/\[\[PREFAB_ID\]\]/gm, id);
+  return data.replace(/\[\[PREFAB_ID\]\]/gm, id);
 }
 
 /*
@@ -20,36 +19,36 @@ async function fetch_prefab(name, id, start)
  @settings - Object containing replacements to default variables
  @id - unique ID for prefab
 */
-async function add_prefab(name, parent, settings, id = prefab_index++, start = "")
-{
-    let prefab = await fetch_prefab(name, id, start);
+async function add_prefab(
+  name,
+  parent,
+  settings,
+  id = prefab_index++,
+  start = ""
+) {
+  let prefab = await fetch_prefab(name, id, start);
 
-    if (prefab != null)
-    {
-
-        for (const key in settings) {            
-            prefab = prefab.replace(key, settings[key]);
-        }
-        
-        document.getElementById(parent).innerHTML += prefab;
+  if (prefab != null) {
+    for (const key in settings) {
+      prefab = prefab.replace(key, settings[key]);
     }
+
+    document.getElementById(parent).innerHTML += prefab;
+  }
 }
 
-function show_prefab_element(element_name)
-{
-    prefab = document.getElementById(`prefab-${element_name}`);
+function show_prefab_element(element_name) {
+  prefab = document.getElementById(`prefab-${element_name}`);
 
-    console.log(prefab);
+  console.log(prefab);
 
-    prefab.style.scale = 1;
-    prefab.style.visibility = "visible";
+  prefab.style.scale = 1;
+  prefab.style.visibility = "visible";
 }
 
-function hide_prefab_element(element_name)
-{
-    prefab = document.getElementById(`prefab-${element_name}`);
+function hide_prefab_element(element_name) {
+  prefab = document.getElementById(`prefab-${element_name}`);
 
-    prefab.style.scale = 0;
-    prefab.style.visibility = "hidden";
+  prefab.style.scale = 0;
+  prefab.style.visibility = "hidden";
 }
-

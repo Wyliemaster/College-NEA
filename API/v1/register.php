@@ -47,5 +47,3 @@ if (!empty($name) && !empty($pass))
     exit();
 }
 exit("Please Login Details");
-
-?>

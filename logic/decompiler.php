@@ -7,7 +7,7 @@ class Decompiler
     //@type = array(Token)
     //@Description - A queue containing all tokens to avoid them being processed in the wrong order
     private $token_queue = [];
-    
+
     //@type = Bool
     //@Description - if set to true, the decompiler will stop decompiling code
     static private $halt = false;
@@ -43,7 +43,7 @@ class Decompiler
     }
 
     // @Description - Peaks the next item in the queue
-    public function peak() : Token
+    public function peak(): Token
     {
         if (count($this->token_queue) > 0) {
             return $this->token_queue[0];
@@ -52,7 +52,7 @@ class Decompiler
 
     // @Description - Peaks the queue and then removes the
     // latest element
-    public function get_from_queue_and_update() : Token|NULL
+    public function get_from_queue_and_update(): Token|NULL
     {
         if (count($this->token_queue) > 0) {
             $data = $this->peak();
@@ -81,14 +81,12 @@ class Decompiler
 
         $decompiler = Helpers::get_shared_decompiler();
 
-        while($token = $decompiler->get_from_queue_and_update())
-        {            
+        while ($token = $decompiler->get_from_queue_and_update()) {
             // to make value consistent between filetypes
-            if(!is_numeric($token->value) && $token->value != "")
-            {
+            if (!is_numeric($token->value) && $token->value != "") {
                 $token->value = Helpers::find_line_for_identifer($token->value);
             }
-        
+
             // Generate Code based on token
             Decompiler::codegen($token);
         }
@@ -98,25 +96,23 @@ class Decompiler
         $line_no = -1;
 
         // Make a HTML element that contains the pseudocode
-        for ($i=0; $i < count(Decompiler::$code); $i++) { 
+        for ($i = 0; $i < count(Decompiler::$code); $i++) {
             $elem = Decompiler::$code[$i];
-            
-            
-            if ($elem == CodeKeys::END) 
-            {
+
+
+            if ($elem == CodeKeys::END) {
                 $inline_css = "";
                 $line_no = -1;
             }
 
-            $code .= "<custom $inline_css id='$line_no'>".$elem."</custom><br>";
+            $code .= "<custom $inline_css id='$line_no'>" . $elem . "</custom><br>";
 
-            if ($elem == CodeKeys::START) 
-            {
+            if ($elem == CodeKeys::START) {
                 $inline_css = "class='indent'";
                 $line_no = 0;
             }
-            
-            
+
+
             if ($line_no >= 0) $line_no++;
         }
         return $code;
@@ -125,13 +121,11 @@ class Decompiler
     // @Description - Calculates where variables are located
     private static function calc_var(int $i)
     {
-        if (Decompiler::$filetype == FileMagic::MACHINE_CODE)
-        {
+        if (Decompiler::$filetype == FileMagic::MACHINE_CODE) {
             return $i - Decompiler::$data_start;
         }
 
-        if( Decompiler::$filetype == FileMagic::ASSEMBLY )
-        {
+        if (Decompiler::$filetype == FileMagic::ASSEMBLY) {
             return $i - Decompiler::$data_start;
         }
     }
@@ -140,47 +134,45 @@ class Decompiler
     // $token - Token that contains important instruction data
     private static function codegen(Token $token)
     {
-        
+
         // Since data is intialised first, this is to give the user
         // an indicator for when the actual code starts
-        if ( $token->line == 1 && !empty($token->key))
-        {
+        if ($token->line == 1 && !empty($token->key)) {
             Decompiler::push_to_code("INTEGER ACC = 0");
             Decompiler::push_to_code(CodeKeys::START);
         }
         // ignore if the key is empty
-        if($token->key == "") return;
-        
+        if ($token->key == "") return;
+
         // Logic to gen code
-        switch($token->key)
-        {
+        switch ($token->key) {
             case Keys::LOAD:
-              $acc = Decompiler::$var[Decompiler::calc_var($token->value)];
-              Decompiler::push_to_code("ACC = $acc");
-            break;
+                $acc = Decompiler::$var[Decompiler::calc_var($token->value)];
+                Decompiler::push_to_code("ACC = $acc");
+                break;
             case Keys::STORE:
                 $name = Decompiler::$var[Decompiler::calc_var($token->value)];
                 Decompiler::push_to_code("$name = ACC");
-            break;
+                break;
             case Keys::DATA:
                 $value = intval($token->value);
                 $loc = Decompiler::$var[Decompiler::calc_var($token->line)];
                 array_unshift(Decompiler::$code, "INTEGER $loc = $value");
-            break;
+                break;
 
             case Keys::ADD:
                 $var = Decompiler::$var[Decompiler::calc_var($token->value)];
                 Decompiler::push_to_code("ACC += $var");
-            break;
+                break;
 
             case Keys::SUB:
                 $var = Decompiler::$var[Decompiler::calc_var($token->value)];
                 Decompiler::push_to_code("ACC -= $var");
-            break;
+                break;
 
             case Keys::OUTPUT:
                 Decompiler::push_to_code("OUTPUT( ACC )");
-            break;
+                break;
 
             case Keys::INPUT:
                 Decompiler::push_to_code("ACC = USER_INPUT( )");
@@ -190,17 +182,15 @@ class Decompiler
 
                 $branch_str = "";
 
-                if ($token->Flags & Flags::kPositive)
-                {
+                if ($token->Flags & Flags::kPositive) {
                     $branch_str .= "IF ( ACC > 0 ) THEN ";
                 }
 
-                if ($token->Flags & Flags::kZero)
-                {
+                if ($token->Flags & Flags::kZero) {
                     $branch_str .= "IF ( ACC == 0 ) THEN ";
                 }
 
-                $branch_str .= "GOTO LINE_".$token->value;
+                $branch_str .= "GOTO LINE_" . $token->value;
 
                 Decompiler::push_to_code($branch_str);
                 break;

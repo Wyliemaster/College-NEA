@@ -9,10 +9,6 @@ class FilterTypes
 
 $filter = $_GET["filter"] != FilterTypes::DEFAULT ? $_GET["filter"] : $_COOKIE["CONTENT"];
 
-
-
-
-
 switch($filter)
 {
     case FilterTypes::MY_CODE:
@@ -39,4 +35,3 @@ switch($filter)
 }
 
 setcookie("CONTENT", $filter, time() + (86400 * 30), "/");
-?>

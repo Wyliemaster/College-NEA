@@ -38,7 +38,7 @@
         } else {
             $name = $_COOKIE["NAME"] != "" ? $_COOKIE["NAME"] : "[[NAME]]";
             echo '<div id="global-navbar-account">
-            <a href="./user_content/?myCode='.$_COOKIE["LOGIN"].'" class="global-navbar-item">' . $name . '\'s Code</a>
+            <a href="./user_content/?myCode=' . $_COOKIE["LOGIN"] . '" class="global-navbar-item">' . $name . '\'s Code</a>
             <a onclick="logout()" class="global-navbar-item">Logout</a>
         </div>';
         }
@@ -54,7 +54,7 @@
         <!--contenteditable allows the user to edit the field-->
         <div class="main-input-output-box" contenteditable="true" id="input">
             <?php
-                echo $_GET["default"] ? $_GET["default"] : "Input";
+            echo $_GET["default"] ? $_GET["default"] : "Input";
             ?>
         </div>
         <div class="main-input-output-buttons">
