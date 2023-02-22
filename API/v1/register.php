@@ -35,7 +35,7 @@ if (!empty($name) && !empty($pass))
                 setcookie("NAME", $name, $time + (86400 * 30), "/");
 
                 $db = NULL;
-                exit("Congrats $name. Your registration was successful.");
+                exit("Congrats $name. Your registration was successful. <br><a href='../../'>Return to home page</a>");
             }
 
         }
@@ -46,6 +46,6 @@ if (!empty($name) && !empty($pass))
     $db = NULL;
     exit();
 }
-exit("Please Provide Login Details");
+exit("Please Login Details");
 
 ?>
