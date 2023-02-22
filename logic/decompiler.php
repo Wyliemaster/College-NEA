@@ -134,6 +134,7 @@ class Decompiler
         
         if ( $token->line == 1 && !empty($token->key))
         {
+            Decompiler::push_to_code("INTEGER ACC = 0");
             Decompiler::push_to_code(CodeKeys::START);
         }
         if($token->key == "") return;
