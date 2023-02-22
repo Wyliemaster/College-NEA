@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="frontend/css/main.css">
     <link rel="stylesheet" href="frontend/css/home.css">
     <script src="./frontend/scripts/main.js"></script>
+    <script src="./frontend/scripts/prefab.js"></script>
 </head>
 
 <body>
@@ -28,6 +29,9 @@
             <a href="#" class="global-navbar-item">Register</a>
         </div>
     </div>
+
+    <div id="test"></div>
+
 
     <div class="main-input-output">
         <!--contenteditable allows the user to edit the field-->
@@ -47,6 +51,18 @@
         </div>
 
     </div>
+
+
+
+    <script>
+        // For testing purposes
+        load_prefab("popup", "test", {
+            "[[POPUP_TITLE]]": "Title",
+            "[[POPUP_DESC]]": "Desc",
+            "[[POPUP_CONTAINER]]": "Container"
+        });
+    </script>
+
 
 </body>
 
