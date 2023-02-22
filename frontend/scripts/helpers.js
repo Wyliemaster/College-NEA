@@ -25,6 +25,21 @@ function load_main_page_prefabs() {
     <input type="submit" value="Submit">
   </form> `;
 
+
+let upload = `<form action="./API/v1/upload_code.php"  method="get">
+<label for="title">Title</label><br>
+<input type="text" id="title" name="title" placeholder="Title..."><br>
+<label for="desc">Description</label><br>
+
+<input type="text" id="code" name="code" placeholder="code..."><br>
+<label for="desc">code</label><br>
+
+<input type="text" id="desc" name="desc" placeholder="description"><br><br>
+<input type="submit" value="Submit">
+</form> `;
+
+
+
   add_prefab(
     "popup",
     "Prefabs",
@@ -46,6 +61,18 @@ function load_main_page_prefabs() {
     },
     1
   );
+
+  add_prefab(
+    "popup",
+    "Prefabs",
+    {
+      "[[POPUP_TITLE]]": "Upload",
+      "[[POPUP_DESC]]": "Explain what your code does in the forms below",
+      "[[POPUP_CONTAINER]]": upload,
+    },
+    2
+  );
+
 }
 
 function load_content_page_prefabs() {
@@ -93,4 +120,11 @@ function load_content_page_prefabs() {
 async function logout(start = "") {
   await fetch(`${start}./API/v1/logout.php`);
   location.reload();
+}
+
+function upload_code()
+{
+        show_prefab_element("popup-background-2");
+        show_prefab_element("popup-2");
+      
 }
