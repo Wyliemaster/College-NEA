@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="frontend/css/home.css">
     <script src="./frontend/scripts/main.js"></script>
     <script src="./frontend/scripts/prefab.js"></script>
+    <script src="./frontend/scripts/helpers.js"></script>
+
+    
 </head>
 
 <body>
@@ -26,7 +29,7 @@
         </div>
         <div id="global-navbar-account">
             <a href="#" class="global-navbar-item">Login</a>
-            <a href="#" class="global-navbar-item">Register</a>
+            <a onclick="show_register_popup();" class="global-navbar-item">Register</a>
         </div>
     </div>
 
@@ -56,11 +59,13 @@
 
     <script>
         // For testing purposes
-        load_prefab("popup", "test", {
+        add_prefab("popup", "test", {
             "[[POPUP_TITLE]]": "Title",
             "[[POPUP_DESC]]": "Desc",
             "[[POPUP_CONTAINER]]": "Container"
         });
+
+
     </script>
 
 

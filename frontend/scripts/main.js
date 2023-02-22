@@ -51,6 +51,10 @@ async function decompile_file() {
     
         document.getElementById("output").innerHTML = text;
     }
+  }
 
-
+  async function fetch_file(path)
+  {
+    const response = await fetch(path);
+    return await response.text();
   }
