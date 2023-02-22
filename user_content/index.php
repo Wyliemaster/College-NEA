@@ -66,7 +66,7 @@
     ?>
 
 
-    <!-- <div class="user-content-container">
+    <div class="user-content-container">
         <a class="user-content-btn">btn</a>
         <a class="user-content-btn">btn</a>
         <a class="user-content-btn">btn</a>
@@ -79,7 +79,7 @@
         <a class="user-content-btn">btn</a>
         <a class="user-content-btn">btn</a>
 
-    </div> -->
+    </div>
     <script>
         load_content_page_prefabs();
     </script>
