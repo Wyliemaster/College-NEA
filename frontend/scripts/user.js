@@ -2,11 +2,14 @@ let cache = [];
 
 async function get_content(filter) {
   let str = "";
+  console.log(filter)
   const response = await fetch(`../API/v1/content.php?filter=${filter}`);
 
   if (response.status != 200) return null;
 
-  let data = await response.json();
+    let data = await response.json();
+
+    console.log(data)
 
   cache = data;
 
@@ -30,6 +33,9 @@ async function get_content(filter) {
   }
   document.getElementById("user-content-container").innerHTML = str;
 }
+
+
+
 
 async function more_details(id) {
   show_prefab_element(`popup-background-${100 + id}`);

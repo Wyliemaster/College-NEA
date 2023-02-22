@@ -7,7 +7,8 @@ class FilterTypes
      const MY_CODE = 5;
 }
 
-$filter = $_GET["filter"] != FilterTypes::DEFAULT ? $_GET["filter"] : $_COOKIE["CONTENT"];
+$filter = $_GET["filter"];
+
 
 switch($filter)
 {
@@ -29,23 +30,26 @@ switch($filter)
                     echo json_encode($data);
                 }
             }
+            $query = NULL;
         }
+        $db = NULL;
         break;
 
     default:
         $db = db_connect();
 
-        $query = $db->prepare("SELECT tblcontent.content_title, tblcontent.content_description, tblcontent.content_code 
-        FROM tblcontent LIMIT 25");
+        $query = $db->prepare("SELECT content_title, content_description, content_code FROM tblcontent LIMIT 25");
             
-        if($query->execute([":name" => $_COOKIE["NAME"]]))
+        if($query->execute())
         {
-            if ($data = $query->fetchAll())
+            if( $data = $query->fetchAll())
             {
                 echo json_encode($data);
             }
         }
-    break;
+        $query = NULL;
+        $db = NULL;
+        break;
 }
 
 setcookie("CONTENT", $filter, time() + (86400 * 30), "/");

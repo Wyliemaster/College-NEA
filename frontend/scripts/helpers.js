@@ -29,12 +29,12 @@ function load_main_page_prefabs() {
 let upload = `<form action="./API/v1/upload_code.php"  method="get">
 <label for="title">Title</label><br>
 <input type="text" id="title" name="title" placeholder="Title..."><br>
+
 <label for="desc">Description</label><br>
+<input type="text" id="desc" name="desc" placeholder="description"><br>
+<label for="code">code</label><br>
+<input type="text" id="code" name="code" placeholder="code..."><br><br>
 
-<input type="text" id="code" name="code" placeholder="code..."><br>
-<label for="desc">code</label><br>
-
-<input type="text" id="desc" name="desc" placeholder="description"><br><br>
 <input type="submit" value="Submit">
 </form> `;
 

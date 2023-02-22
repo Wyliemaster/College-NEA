@@ -62,7 +62,7 @@
 
     <?php
     // save filter state
-    if ($_GET["myCode"] === $_COOKIE["LOGIN"]) {
+    if ($_GET["myCode"] === $_COOKIE["LOGIN"] && $_COOKIE["LOGIN"] != "") {
         $filter = 5;
     } else {
         if ($_COOKIE["CONTENT"]) {
@@ -71,6 +71,8 @@
             $filter = 1;
         }
     }
+
+        $filter = 1;
 
     setcookie("CONTENT", $filter, time() + (86400 * 30), "/");
 

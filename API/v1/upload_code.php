@@ -26,7 +26,8 @@ if ($_COOKIE["LOGIN"])
                 ":id" => $ID
             ]))
             {
-                exit("Code Uploaded");
+                header("Location: ../../user_content/?filter=5");
+                exit();            
             }
         }
 
