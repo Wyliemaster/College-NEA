@@ -32,6 +32,4 @@ if ($_COOKIE["LOGIN"])
 
 
     }
-
- 
 }

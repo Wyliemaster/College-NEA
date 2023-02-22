@@ -32,6 +32,20 @@ switch($filter)
         }
         break;
 
+    default:
+        $db = db_connect();
+
+        $query = $db->prepare("SELECT tblcontent.content_title, tblcontent.content_description, tblcontent.content_code 
+        FROM tblcontent LIMIT 25");
+            
+        if($query->execute([":name" => $_COOKIE["NAME"]]))
+        {
+            if ($data = $query->fetchAll())
+            {
+                echo json_encode($data);
+            }
+        }
+    break;
 }
 
 setcookie("CONTENT", $filter, time() + (86400 * 30), "/");
