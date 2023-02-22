@@ -1,4 +1,5 @@
 <?php
+// Dataclass containing the opcodes for each instruction
 class Opcodes
 {
     const HLT = 0;
@@ -16,6 +17,7 @@ class Opcodes
     const IO_OUTPUT = 2;
 };
 
+// Dataclass containing the Mnemonic for each instruction
 class Mnemonic
 {
     const HLT = "HLT";
@@ -34,6 +36,7 @@ class Mnemonic
     const DAT = "DAT";
 };
 
+// Dataclass containing strings which identify the file type
 class FileMagic
 {
     const ASSEMBLY = "1530";

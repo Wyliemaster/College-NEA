@@ -12,20 +12,25 @@ class Decompiler
     //@Description - if set to true, the decompiler will stop decompiling code
     static private $halt = false;
 
-    //@type = int(string)
+    //@type = array(string)
     //@Description - array of local variables
     static public $var = [];
 
+    //@Type = array(string)
+    //@Description - Array of decompiled lines of code
     static private $code = [];
 
+    //@Type = string
+    //@Description - The type of file which is being decompiled
     static private $filetype = "";
 
-    static private $accumulator;
-
+    //@type = int
+    //@Description - The part of the file where the data section starts
     static public $data_start = 65535;
 
 
-    public function queue_size()
+    //@Description - Fetches the size of the token queue [DEBUGGING]
+    public function queue_size(): int
     {
         return count($this->token_queue);
     }
@@ -64,7 +69,10 @@ class Decompiler
         return $this->token_queue;
     }
 
-    public static function decompile($data, $magic)
+    // @Description - Decompiles the input
+    // $data - the code to be decompiled
+    // $magic - special value to denote which filetype
+    public static function decompile(string $data, string $magic)
     {
         $code = "";
 
@@ -73,16 +81,15 @@ class Decompiler
 
         $decompiler = Helpers::get_shared_decompiler();
 
-        $a = $decompiler->queue_size();
-
-
         while($token = $decompiler->get_from_queue_and_update())
         {            
+            // to make value consistent between filetypes
             if(!is_numeric($token->value) && $token->value != "")
             {
                 $token->value = Helpers::find_line_for_identifer($token->value);
             }
         
+            // Generate Code based on token
             Decompiler::codegen($token);
         }
 
@@ -90,6 +97,7 @@ class Decompiler
         $inline_css = "";
         $line_no = -1;
 
+        // Make a HTML element that contains the pseudocode
         for ($i=0; $i < count(Decompiler::$code); $i++) { 
             $elem = Decompiler::$code[$i];
             
@@ -114,6 +122,7 @@ class Decompiler
         return $code;
     }
 
+    // @Description - Calculates where variables are located
     private static function calc_var(int $i)
     {
         if (Decompiler::$filetype == FileMagic::MACHINE_CODE)
@@ -127,22 +136,25 @@ class Decompiler
         }
     }
 
+    // @Description - Generates code from token
+    // $token - Token that contains important instruction data
     private static function codegen(Token $token)
     {
-
-        // Helpers::print_object($token);
         
+        // Since data is intialised first, this is to give the user
+        // an indicator for when the actual code starts
         if ( $token->line == 1 && !empty($token->key))
         {
             Decompiler::push_to_code("INTEGER ACC = 0");
             Decompiler::push_to_code(CodeKeys::START);
         }
+        // ignore if the key is empty
         if($token->key == "") return;
         
+        // Logic to gen code
         switch($token->key)
         {
             case Keys::LOAD:
-              Decompiler::$accumulator = Decompiler::$var[Decompiler::calc_var($token->value)];
               $acc = Decompiler::$var[Decompiler::calc_var($token->value)];
               Decompiler::push_to_code("ACC = $acc");
             break;
@@ -196,9 +208,9 @@ class Decompiler
                 Decompiler::push_to_code(CodeKeys::END);
                 break;
         }
-        // Helpers::print_object(Decompiler::$code);
     }
 
+    // Helper function to push code
     private static function push_to_code(string $data)
     {
         array_push(Decompiler::$code, $data);

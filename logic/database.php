@@ -14,8 +14,10 @@ function db_connect()
     return $pdo;
 }
 
+// clean input
 function clean(string $data)
 {
+    // replaces every character expect abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 with nothing
     return preg_replace("[^a-zA-Z0-9]", "", $data);
 }
 ?>

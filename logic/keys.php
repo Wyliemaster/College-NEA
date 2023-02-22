@@ -1,4 +1,5 @@
 <?php
+// Dataclass for Key names to make edits easier
 class Keys
 {
     const HALT = "KEY_HALT";
@@ -15,6 +16,7 @@ class Keys
     const INVALID = "KEY_INVALID";
 }
 
+// Dataclass for the start and end of code
 class CodeKeys
 {
     const START = "CODE_START";

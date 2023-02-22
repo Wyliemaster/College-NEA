@@ -27,9 +27,9 @@ if (!empty($name) && !empty($pass))
             $query = NULL;
             $password = password_hash($pass, PASSWORD_DEFAULT);
             
-            $query = $db->prepare("INSERT INTO `tblusers` (`user_name`, `user_password`, `user_last_login`) VALUES (:name, :pass, :time)");
+            $query = $db->prepare("INSERT INTO `tblusers` (`user_name`, `user_password`) VALUES (:name, :pass)");
 
-            if($query->execute([":name" => $name, ":pass" => $password, ":time" => $time]))
+            if($query->execute([":name" => $name, ":pass" => $password]))
             {
                 setcookie("LOGIN", sha1($_POST["uname"] . strval($time) ), $time + (86400 * 30), "/");
                 setcookie("NAME", $name, $time + (86400 * 30), "/");

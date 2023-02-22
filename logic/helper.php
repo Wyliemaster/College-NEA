@@ -6,7 +6,12 @@ error_reporting(0);
 class Helpers
 {
 
+    //@Type = Decompiler
+    //@Description - Global Decompiler Object 
     static $decompiler = NULL;
+
+    //@type = string
+    //@Description - the file which needs to be decompiled 
     static $file = NULL;
 
 
@@ -25,8 +30,6 @@ class Helpers
                 for ($i = 0; $i < $total_instructions; $i++) {
                     $token = Token::tokenise($data[$i]);
                     $token->line = $i + 1;
-
-                    // echo $token->line, "<br>", Decompiler::$data_start, "<br>";
 
                     if ($token->line < Decompiler::$data_start && $token->key === Keys::DATA)
                         Decompiler::$data_start = $token->line;
@@ -78,6 +81,7 @@ class Helpers
     }
 
 
+    // Fetches the global instance of the decompiler object
     public static function get_shared_decompiler(): Decompiler
     {
         if (Helpers::$decompiler == NULL) {
@@ -92,12 +96,12 @@ class Helpers
         Helpers::$file = $file;
     }
 
-
     public static function get_file()
     {
         return Helpers::$file;
     }
 
+    // Finds the line of code where the identifier was for assembly
     public static function find_line_for_identifer(string $identifier): int|string
     {
         $file = Helpers::get_file();
@@ -124,6 +128,8 @@ class Helpers
         return Keys::INVALID;
     }
 
+
+    // Gets the entire line in an array using an index
     public static function get_line(int $line_no)
     {
         $file = Helpers::get_file();

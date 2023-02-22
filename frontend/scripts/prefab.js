@@ -1,5 +1,6 @@
 let prefab_index = 0;
 
+// Fetches the prefab and converts it to a usable format
 async function fetch_prefab(name, id)
 {
     const response = await fetch(`./frontend/prefab/${name}.prefab`);
@@ -8,7 +9,7 @@ async function fetch_prefab(name, id)
 
     let data = await response.text();
 
-    return data.replace(/\[\[PREFAB_ID\]\]/gm, id++);
+    return data.replace(/\[\[PREFAB_ID\]\]/gm, id);
 }
 
 /*
@@ -17,6 +18,7 @@ async function fetch_prefab(name, id)
  @name - the name of the prefab
  @parent - the parent to attatch the DOM elemnt to
  @settings - Object containing replacements to default variables
+ @id - unique ID for prefab
 */
 async function add_prefab(name, parent, settings, id = prefab_index++)
 {
