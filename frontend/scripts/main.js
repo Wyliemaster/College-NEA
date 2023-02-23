@@ -1,3 +1,4 @@
+// Decompiles the assembly code that is in the "input" DIV
 async function decompile_assembly() {
   let code = document.getElementById("input").innerText;
 
@@ -23,6 +24,7 @@ function upload_file() {
     .addEventListener("change", decompile_file, false);
 }
 
+// Decompiles the machine code provided by the uploaded file
 async function decompile_file() {
   let reader = new FileReader();
 
@@ -47,6 +49,7 @@ async function decompile_file() {
   };
 }
 
+// fetches file from a path as text
 async function fetch_file(path) {
   const response = await fetch(path);
   return await response.text();

@@ -8,10 +8,6 @@ class Decompiler
     //@Description - A queue containing all tokens to avoid them being processed in the wrong order
     private $token_queue = [];
 
-    //@type = Bool
-    //@Description - if set to true, the decompiler will stop decompiling code
-    static private $halt = false;
-
     //@type = array(string)
     //@Description - array of local variables
     static public $var = [];

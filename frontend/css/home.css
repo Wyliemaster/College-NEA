@@ -1,3 +1,4 @@
+/* Setting up a container for user input and output */
 .main-input-output
 {
     display: flex;
@@ -7,6 +8,7 @@
     border: black 1px solid;
 }
 
+/* This is each box where code will be displayed */
 .main-input-output-box
 {
     background-color: rgba(0, 0, 0, 0.124);
@@ -20,6 +22,7 @@
     padding: 5px;
 }
 
+/* This is a container that holds buttons for decompiling */
 .main-input-output-buttons
 {
     display: flex;
@@ -30,6 +33,7 @@
     height: 300px;
 }
 
+/* A button which is used for decompiling */
 .main-input-output-btn
 {
     transition: all 0.5s;
@@ -50,19 +54,20 @@
 
 }
 
+/* creates an effect when hovering over a button*/
 .main-input-output-btn:hover
 {
     transform: scale(1.05);
     background-color: rgb(62, 61, 61);
 }
 
+/* Indenting psuedocode*/
 .indent
 {
     margin-left: 5%;
 }
 
+/* Hiding the upload file button so we can have a custom one */
 #upload-file {
     display: none;
 }
-
-​
