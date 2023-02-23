@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="frontend/css/main.css">
     <link rel="stylesheet" href="frontend/css/home.css">
-
+    <script src="./frontend/scripts/prefab.js"></script>
 </head>
 <body>
     <div class="global-navbar">
@@ -22,6 +22,10 @@
             <a href="#" class="global-navbar-item">Register</a>
         </div>
     </div>
+
+
+    <div id="Prefabs"></div>
+
 
     <div class="main-input-output">
         <div class="main-input-output-box" contenteditable="true" id="input"> <!--contenteditable allows the user to edit the field-->
@@ -47,5 +51,18 @@
         </div>
 
     </div>
+
+    <script>
+        add_prefab(
+            "popup",
+            "Prefabs",
+            {
+              "[[POPUP_TITLE]]": "This is the title for the popup prefab",
+              "[[POPUP_DESC]]": "This is the description for the popup prefab",
+              "[[POPUP_CONTAINER]]": `Add anything here like a <button>button</button> or <input type="text" placeholder="input boxes">`,
+            },
+            0
+          );
+    </script>
 </body>
 </html>
