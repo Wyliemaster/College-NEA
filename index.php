@@ -48,8 +48,6 @@
     </div>
 
     <div id="Prefabs"></div>
-
-
     <div class="main-input-output">
         <!--contenteditable allows the user to edit the field-->
         <div class="main-input-output-box" contenteditable="true" id="input">
@@ -74,7 +72,6 @@
         if ($_COOKIE["LOGIN"])
             echo '<a class="main-input-output-btn" onclick="upload_code()">Upload Code to Server</a>';
         ?>
-
         </div>
         <!--
             This is where the Pseudocode is displayed
@@ -82,13 +79,7 @@
         <div class="main-input-output-box" id="output">
             Output
         </div>
-
     </div>
-
-    <script>
-        load_main_page_prefabs()
-    </script>
-
+    <script>load_main_page_prefabs()</script>
 </body>
-
 </html>

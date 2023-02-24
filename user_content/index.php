@@ -50,8 +50,6 @@
     </div>
     <div id="Prefabs"></div>
 
-
-
     <!-- <label class="user-filter-title">sort by</label>
     <div class="user-filters">
         <div class="user-filter-btn">filter</div>
@@ -72,22 +70,18 @@
         }
     }
 
-        $filter = 1;
+    $filter = 1;
 
     setcookie("CONTENT", $filter, time() + (86400 * 30), "/");
-
     // first load 
     echo "<script>get_content($filter)</script>";
     ?>
-
-
     <div id="user-content-container"></div>
 
     <div id="details_prefab"></div>
     <script>
         load_content_page_prefabs();
     </script>
-
 </body>
 
 </html>
