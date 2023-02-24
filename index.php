@@ -58,17 +58,27 @@
             ?>
         </div>
         <div class="main-input-output-buttons">
+            <!--
+                This button is responsible for decompiling the code
+            -->
             <a class="main-input-output-btn" onclick="decompile_assembly()">Decompile</a>
 
+            <!--
+                This button is used to upload LMC Machine code and decompile it
+            -->
             <input id="upload-file" type="file" style="display:none;" />
             <a class="main-input-output-btn" onclick="upload_file()">Upload File</a>
 
+        <!-- if the user is logged in, show the upload code button-->
         <?php
         if ($_COOKIE["LOGIN"])
             echo '<a class="main-input-output-btn" onclick="upload_code()">Upload Code to Server</a>';
         ?>
 
         </div>
+        <!--
+            This is where the Pseudocode is displayed
+        -->
         <div class="main-input-output-box" id="output">
             Output
         </div>

@@ -1,10 +1,10 @@
+/*Global website font*/
 @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Source+Sans+Pro&display=swap');
 *{
     font-family: 'Patua One', cursive;
     font-family: 'Source Sans Pro', sans-serif;
 }
-
-
+/*setting up background and making every element a flex object*/
 body
 {
     margin: 0;
@@ -17,6 +17,7 @@ body
 
 }
 
+/* Container for the navigation bar*/
 .global-navbar
 {
     padding: auto;

@@ -18,6 +18,7 @@ class Helpers
     public static function handle_input(string $input, string $magic)
     {
         Helpers::set_file($input);
+        
         if ($magic == FileMagic::MACHINE_CODE) {
             // Each instruction in LMC is a 3 digit decimal number.
             // We can not analyse it if it does not allign
@@ -26,10 +27,12 @@ class Helpers
 
                 $total_instructions = count($data);
 
+                // converting each instruction into a token and pushing it to the queue
                 for ($i = 0; $i < $total_instructions; $i++) {
                     $token = Token::tokenise($data[$i]);
                     $token->line = $i + 1;
 
+                    // setting the start of the data section for future use
                     if ($token->line < Decompiler::$data_start && $token->key === Keys::DATA)
                         Decompiler::$data_start = $token->line;
 

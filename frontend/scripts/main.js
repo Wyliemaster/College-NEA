@@ -1,3 +1,4 @@
+
 // Decompiles the assembly code that is in the "input" DIV
 async function decompile_assembly() {
   let code = document.getElementById("input").innerText;
