@@ -1,8 +1,10 @@
+/*Change text colour white*/
 body
 {
     color:white;
 }
 
+/*container for filters*/
 .user-filters
 {
     display: flex;
@@ -11,6 +13,7 @@ body
     flex-wrap: wrap;
 }
 
+/*Container for user content*/
 #user-content-container
 {
     display: flex;
@@ -19,6 +22,7 @@ body
     justify-content: space-evenly;
 }
 
+/* Filter Buttons*/
 .user-filter-btn
 {
     text-align: center;
@@ -36,6 +40,7 @@ body
     transition: all 0.5s;  
 }
 
+/* Content Buttons*/
 .user-content-btn
 {
     text-align: center;
@@ -55,13 +60,14 @@ body
     transition: all 0.5s;
 
 }
-
+/*Scale all buttons on hover*/
 .user-content-btn:hover, .user-filter-btn:hover
 {
     transform: scale(1.05);
     background-color: rgb(62, 61, 61);
 }
 
+/* Filter Title*/
 .user-filter-title{
     text-align: center;
     font-size: xx-large;

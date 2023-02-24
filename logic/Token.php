@@ -164,6 +164,7 @@ class Token
         }
     }
 
+    // Converts instruction into a token
     public static function tokenise($instruction): Token
     {
         $token = new Token();

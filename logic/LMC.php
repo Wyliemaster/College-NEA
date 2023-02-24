@@ -43,6 +43,7 @@ class FileMagic
     const MACHINE_CODE = "2167";
 }
 
+// bit flags for branching
 class Flags
 {
     // enums don't allow chosing the number in php for some reason

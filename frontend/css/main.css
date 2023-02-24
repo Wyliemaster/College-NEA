@@ -30,6 +30,7 @@ body
 
 }
 
+/* Each navbar button */
 .global-navbar-item
 {
     transition: all 0.5s;
@@ -41,11 +42,13 @@ body
     text-decoration: none;
 }
 
+/* change colour on hover*/
 .global-navbar-item:hover
 {
     background-color: rgb(49, 49, 49);
 }
 
+/* the title text on the navbar */
 .global-navbar-title
 {
     display: flex;

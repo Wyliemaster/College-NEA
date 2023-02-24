@@ -18,6 +18,7 @@ async function decompile_assembly() {
   document.getElementById("output").innerHTML = text;
 }
 
+// Adds gives a prompt to upload a file and then calls decompile_file afterwards
 function upload_file() {
   document.getElementById("upload-file").click();
   document

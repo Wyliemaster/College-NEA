@@ -16,9 +16,7 @@ async function get_content(filter) {
   for (let index = 0; index < data.length; index++) {
     const element = data[index];
     let container = `<pre style="background-color:grey; padding: 20px; border: 1px red solid; overflow-y: hidden; max-height: 200px; font-size: small;" onclick="open_content(${index})">${element["content_code"]}</pre>`;
-    str += `
-        <a class="user-content-btn" onclick="more_details(${index})">${element["content_title"]}</a>
-        `;
+    str += `<a class="user-content-btn" onclick="more_details(${index})">${element["content_title"]}</a>`;
     add_prefab(
       "popup",
       "details_prefab",
@@ -31,6 +29,7 @@ async function get_content(filter) {
       "../"
     );
   }
+  // inject string into container
   document.getElementById("user-content-container").innerHTML = str;
 }
 

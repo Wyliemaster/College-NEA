@@ -1,13 +1,14 @@
+// creates register popup
 function show_register_popup() {
   show_prefab_element("popup-background-0");
   show_prefab_element("popup-0");
 }
-
+// shows login popup
 function show_login_popup() {
   show_prefab_element("popup-background-1");
   show_prefab_element("popup-1");
 }
-
+// Loads all main page prefabs into the webpage
 function load_main_page_prefabs() {
   let register = `<form action="./API/v1/register.php"  method="post">
     <label for="uname">Username</label><br>
@@ -74,7 +75,7 @@ let upload = `<form action="./API/v1/upload_code.php"  method="get">
   );
 
 }
-
+// loads all the content page prefabs into the webpage
 function load_content_page_prefabs() {
   let register = `<form action="../API/v1/register.php"  method="post">
       <label for="uname">Username</label><br>
@@ -116,15 +117,14 @@ function load_content_page_prefabs() {
     "../"
   );
 }
-
+// Logs the user out
 async function logout(start = "") {
   await fetch(`${start}./API/v1/logout.php`);
   location.reload();
 }
-
+// creates upload code popup
 function upload_code()
 {
         show_prefab_element("popup-background-2");
         show_prefab_element("popup-2");
-      
 }
