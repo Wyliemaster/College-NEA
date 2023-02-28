@@ -24,6 +24,10 @@ class Decompiler
     //@Description - The part of the file where the data section starts
     static public $data_start = 65535;
 
+    //@Type = bool
+    //@Description - When the halt instruction is reached to avoid duplicates
+    static public $halt = false;
+
 
     //@Description - Fetches the size of the token queue [DEBUGGING]
     public function queue_size(): int
@@ -101,14 +105,15 @@ class Decompiler
                 $line_no = -1;
             }
 
+            
             $code .= "<custom $inline_css id='$line_no'>" . $elem . "</custom><br>";
-
+            
             if ($elem == CodeKeys::START) {
                 $inline_css = "class='indent'";
                 $line_no = 0;
             }
-
-
+            
+            
             if ($line_no >= 0) $line_no++;
         }
         return $code;
@@ -122,7 +127,7 @@ class Decompiler
         }
 
         if (Decompiler::$filetype == FileMagic::ASSEMBLY) {
-            return $i - Decompiler::$data_start;
+            return $i - Decompiler::$data_start ;
         }
     }
 
@@ -150,11 +155,7 @@ class Decompiler
                 $name = Decompiler::$var[Decompiler::calc_var($token->value)];
                 Decompiler::push_to_code("$name = ACC");
                 break;
-            case Keys::DATA:
-                $value = intval($token->value);
-                $loc = Decompiler::$var[Decompiler::calc_var($token->line)];
-                array_unshift(Decompiler::$code, "INTEGER $loc = $value");
-                break;
+
 
             case Keys::ADD:
                 $var = Decompiler::$var[Decompiler::calc_var($token->value)];
@@ -191,7 +192,13 @@ class Decompiler
                 Decompiler::push_to_code($branch_str);
                 break;
             case Keys::HALT:
-                Decompiler::push_to_code(CodeKeys::END);
+                    Decompiler::push_to_code(CodeKeys::END);
+                    break;
+                
+            case Keys::DATA:
+                $value = intval($token->value);
+                $loc = Decompiler::$var[Decompiler::calc_var($token->line)];
+                array_unshift(Decompiler::$code, "INTEGER $loc = $value");
                 break;
         }
     }

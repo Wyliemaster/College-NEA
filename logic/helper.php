@@ -52,6 +52,8 @@ class Helpers
                 $data = array();
 
                 /*
+                    REGEX: /\s*(\w+)\s*(\w*)\s*(\w*)\s*$/s
+
                     This Regex is to fetch each identifier out of the assembly.
                     It is limited to 3 identifiers per line
 
@@ -64,10 +66,12 @@ class Helpers
                     - \s(\w*)\s* Fetches the final identifier and ignores anything
                     after it spots a whitespace character
                 */
-                preg_match("/\s*(\w+)\s*(\w*)\s*(\w*)\s*/s", $lines[$i], $data);
+                preg_match("/\\s*(\\w+)\\s*(\\w*)\\s*(\\w*)\\s*$/s", $lines[$i], $data);
 
+                
                 // Gets rid of unneeded info provided by regex
                 array_shift($data);
+
 
                 // Convert the line into tokens
                 $token = Token::tokenise($data);

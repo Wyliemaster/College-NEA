@@ -35,7 +35,8 @@ class Token
 
                     // Doesn't have an operator so returning HALT key
                 case Opcodes::HLT:
-                    if (intval(substr($opcode, 1, 2)) == Opcodes::HLT) {
+                    if ((intval(substr($opcode, 1, 2)) == Opcodes::HLT) && Decompiler::$halt == false) {
+                        Decompiler::$halt = true;
                         $token->key = Keys::HALT;
                         break;
                     }
