@@ -12,6 +12,7 @@ $filter = $_GET["filter"];
 
 switch($filter)
 {
+    // The user can check the code he uploaded
     case FilterTypes::MY_CODE:
         if (isset($_COOKIE["LOGIN"]))
         {
@@ -35,6 +36,7 @@ switch($filter)
         $db = NULL;
         break;
 
+    // fetch content default
     default:
         $db = db_connect();
 

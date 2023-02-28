@@ -52,7 +52,7 @@
         <!--contenteditable allows the user to edit the field-->
         <div class="main-input-output-box" contenteditable="true" id="input">
             <?php
-            echo $_GET["default"] ? $_GET["default"] : "Input";
+            echo $_GET["default"] ? str_replace("\n", "<br>", $_GET["default"]) : "Input";
             ?>
         </div>
         <div class="main-input-output-buttons">

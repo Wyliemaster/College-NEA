@@ -70,4 +70,5 @@
         <p id="prefab-popup-description-[[PREFAB_ID]]">[[POPUP_DESC]]</p>
         <div id="prefab-popup-container-[[PREFAB_ID]]">[[POPUP_CONTAINER]]</div>
     </div>
+    
 </div>
