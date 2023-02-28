@@ -59,20 +59,8 @@
     </div> -->
 
     <?php
-    // save filter state
-    if ($_GET["myCode"] === $_COOKIE["LOGIN"] && $_COOKIE["LOGIN"] != "") {
-        $filter = 5;
-    } else {
-        if ($_COOKIE["CONTENT"]) {
-            $filter = $_COOKIE["CONTENT"];
-        } else {
-            $filter = 1;
-        }
-    }
+    $filter = $_GET["filter"] ? $_GET["filter"] : 0;
 
-    $filter = 1;
-
-    setcookie("CONTENT", $filter, time() + (86400 * 30), "/");
     // first load 
     echo "<script>get_content($filter)</script>";
     ?>

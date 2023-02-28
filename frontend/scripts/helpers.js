@@ -68,7 +68,7 @@ let upload = `<form action="./API/v1/upload_code.php"  method="get">
     "popup",
     "Prefabs",
     {
-      "[[POPUP_TITLE]]": "Upload",
+      "[[POPUP_TITLE]]": `Upload`,
       "[[POPUP_DESC]]": "Explain what your code does in the forms below",
       "[[POPUP_CONTAINER]]": upload,
     },
