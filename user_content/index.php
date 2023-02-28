@@ -50,19 +50,19 @@
     </div>
     <div id="Prefabs"></div>
 
-    <!-- <label class="user-filter-title">sort by</label>
+    <label class="user-filter-title">sort by</label>
     <div class="user-filters">
-        <div class="user-filter-btn">filter</div>
-        <div class="user-filter-btn">filter</div>
-        <div class="user-filter-btn">filter</div>
-        <div class="user-filter-btn">filter</div>
-    </div> -->
+        <div class="user-filter-btn">Default</div>
+        <div class="user-filter-btn">Likes</div>
+        <div class="user-filter-btn">User</div>
+    </div>
 
     <?php
     $filter = $_GET["filter"] ? $_GET["filter"] : 0;
-
+    $u_name = $_GET["user"];
     // first load 
-    echo "<script>get_content($filter)</script>";
+    echo "<script>get_content($filter, '$u_name')</script>";
+
     ?>
     <div id="user-content-container"></div>
 

@@ -1,9 +1,9 @@
 let cache = [];
 
-async function get_content(filter) {
+async function get_content(filter, user) {
   let str = "";
   console.log(filter);
-  const response = await fetch(`../API/v1/content.php?filter=${filter}`);
+  const response = await fetch(`../API/v1/content.php?filter=${filter}&user=${user}`);
 
   // if the request fails, return null
   if (response.status != 200) return null;

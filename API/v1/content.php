@@ -9,7 +9,7 @@ class FilterTypes
 }
 
 $filter = $_GET["filter"];
-
+// $name = $_GET["user"] ? $_GET["user"] : $_COOKIE["NAME"] ;
 
 switch($filter)
 {
@@ -17,6 +17,9 @@ switch($filter)
     case FilterTypes::MY_CODE:
         if (isset($_COOKIE["LOGIN"]))
         {
+            $name = $_GET["user"] ? $_GET["user"] : $_COOKIE["NAME"];
+
+
             $db = db_connect();
 
             $query = $db->prepare("SELECT tblcontent.content_id, tblcontent.content_title, tblcontent.content_description, tblcontent.content_code, tblratings.rating_id 
@@ -25,7 +28,7 @@ switch($filter)
             LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id AND tblusers.user_id = tblratings.user_id
             WHERE tblusers.user_name = :name LIMIT 25");
             
-            if($query->execute([":name" => $_COOKIE["NAME"]]))
+            if($query->execute([":name" => $name]))
             {
                 if ($data = $query->fetchAll())
                 {
