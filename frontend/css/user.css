@@ -25,7 +25,10 @@ body
 /* Filter Buttons*/
 .user-filter-btn
 {
+    
     text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
 
     min-width: 20%;
     max-width: 20%;

@@ -52,9 +52,9 @@
 
     <label class="user-filter-title">sort by</label>
     <div class="user-filters">
-        <div class="user-filter-btn">Default</div>
-        <div class="user-filter-btn">Likes</div>
-        <div class="user-filter-btn">User</div>
+        <a href="?filter=0" class="user-filter-btn">Default</a>
+        <a href="?filter=1" class="user-filter-btn">Likes</a>
+        <a class="user-filter-btn">User</a>
     </div>
 
     <?php
