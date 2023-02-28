@@ -40,7 +40,7 @@
         } else {
             $name = $_COOKIE["NAME"] != "" ? $_COOKIE["NAME"] : "[[NAME]]";
             echo '<div id="global-navbar-account">
-            <a class="global-navbar-item">' . $name . '\'s Code</a>
+            <a href="?filter=5" class="global-navbar-item">' . $name . '\'s Code</a>
             <a onclick="logout(`../`)" class="global-navbar-item">Logout</a>
         </div>';
         }
