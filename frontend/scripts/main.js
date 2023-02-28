@@ -44,9 +44,7 @@ async function decompile_file() {
     });
 
     let text = await response.text();
-
-    console.log(text);
-
+    
     document.getElementById("output").innerHTML = text;
   };
 }

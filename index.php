@@ -1,4 +1,10 @@
-<?php error_reporting(0); ?>
+<?php error_reporting(0); 
+
+if ($_GET["ERROR"])
+{
+    echo "<script type='text/javascript'>alert('".$_GET["ERROR"]."');</script>";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
