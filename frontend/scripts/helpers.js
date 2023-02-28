@@ -33,8 +33,9 @@ let upload = `<form action="./API/v1/upload_code.php"  method="get">
 
 <label for="desc">Description</label><br>
 <input type="text" id="desc" name="desc" placeholder="description"><br>
+
 <label for="code">code</label><br>
-<input type="text" id="code" name="code" placeholder="code..."><br><br>
+<textarea name="code" id="code"></textarea><br><br>
 
 <input type="submit" value="Submit">
 </form> `;

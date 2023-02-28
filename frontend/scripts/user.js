@@ -39,5 +39,5 @@ async function more_details(id) {
 }
 
 async function open_content(id) {
-  window.location.replace(`/NEA/?default=${cache[id]["content_code"]}`);
+  window.location.replace(`/NEA/?default=${encodeURIComponent(cache[id]["content_code"])}`);
 }
