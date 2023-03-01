@@ -44,13 +44,17 @@ switch($filter)
     default:
         $db = db_connect();
     
-        $query = $db->prepare("SELECT tblcontent.content_id, tblcontent.content_title, tblcontent.content_description, tblcontent.content_code, 
-		CASE 
-        	WHEN tblusers.user_name = :name THEN 1
-		END AS rating_id
-        FROM tblcontent 
-        INNER JOIN tblusers ON tblcontent.user_id = tblusers.user_id 
-        LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id AND tblusers.user_id = tblratings.user_id;");
+        $query = $db->prepare("SELECT 
+        tblcontent.content_id, 
+        tblcontent.content_title, 
+        tblcontent.content_description, 
+        tblcontent.content_code, 
+        CASE 
+            WHEN tblratings.user_id = (SELECT tblusers.user_id FROM tblusers WHERE tblusers.user_name = :name) THEN 1 
+            ELSE 0
+        END AS rating_id 
+        FROM tblcontent INNER JOIN tblusers ON tblcontent.user_id = tblusers.user_id 
+        LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id;");
             
         if($query->execute([":name" => $_COOKIE["NAME"]]))
         {
