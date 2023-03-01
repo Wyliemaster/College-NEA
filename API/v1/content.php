@@ -26,7 +26,7 @@ switch($filter)
             FROM tblcontent 
             INNER JOIN tblusers ON tblcontent.user_id = tblusers.user_id 
             LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id AND tblusers.user_id = tblratings.user_id
-            WHERE tblusers.user_name = :name LIMIT 25");
+            WHERE tblusers.user_name = :name ORDER BY tblcontent.content_id DESC LIMIT 25");
             
             if($query->execute([":name" => $name]))
             {
@@ -54,7 +54,7 @@ switch($filter)
             ELSE 0
         END AS rating_id 
         FROM tblcontent INNER JOIN tblusers ON tblcontent.user_id = tblusers.user_id 
-        LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id;");
+        LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id ORDER BY tblcontent.content_id DESC LIMIT 25;");
             
         if($query->execute([":name" => $_COOKIE["NAME"]]))
         {
