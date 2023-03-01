@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2023 at 09:24 PM
+-- Generation Time: Mar 01, 2023 at 07:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -38,6 +38,18 @@ CREATE TABLE `tblcontent` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblratings`
+--
+
+CREATE TABLE `tblratings` (
+  `rating_id` int(11) NOT NULL,
+  `content_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblusers`
 --
 
@@ -59,6 +71,12 @@ ALTER TABLE `tblcontent`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `tblratings`
+--
+ALTER TABLE `tblratings`
+  ADD PRIMARY KEY (`rating_id`);
+
+--
 -- Indexes for table `tblusers`
 --
 ALTER TABLE `tblusers`
@@ -72,13 +90,19 @@ ALTER TABLE `tblusers`
 -- AUTO_INCREMENT for table `tblcontent`
 --
 ALTER TABLE `tblcontent`
-  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
+  MODIFY `content_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblratings`
+--
+ALTER TABLE `tblratings`
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblusers`
 --
 ALTER TABLE `tblusers`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
