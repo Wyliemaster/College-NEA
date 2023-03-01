@@ -54,7 +54,7 @@
     <div class="user-filters">
         <a href="?filter=0" class="user-filter-btn">Default</a>
         <a href="?filter=1" class="user-filter-btn">Likes</a>
-        <a class="user-filter-btn">User</a>
+        <a onclick="user_search()" class="user-filter-btn">User</a>
     </div>
 
     <?php

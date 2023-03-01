@@ -117,6 +117,25 @@ function load_content_page_prefabs() {
     1,
     "../"
   );
+
+  let user_search = `<form action="./"  method="get">
+  <label for="user">Username</label><br>
+  <input type="text" id="user" name="user" placeholder="user123..."><br>
+  <input type="hidden" name="filter" value="5">
+  <input type="submit" value="Submit">
+  </form>`
+
+add_prefab(
+  "popup",
+  "Prefabs",
+  {
+    "[[POPUP_TITLE]]": "User Search",
+    "[[POPUP_DESC]]": "Search code written by a specific user using this form!",
+    "[[POPUP_CONTAINER]]": user_search,
+  },
+  5,
+  "../"
+);
 }
 // Logs the user out
 async function logout(start = "") {
@@ -128,4 +147,10 @@ function upload_code()
 {
         show_prefab_element("popup-background-2");
         show_prefab_element("popup-2");
+}
+
+function user_search()
+{
+  show_prefab_element("popup-background-5");
+  show_prefab_element("popup-5");
 }
