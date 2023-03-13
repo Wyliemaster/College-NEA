@@ -71,3 +71,11 @@
 #upload-file {
     display: none;
 }
+
+textarea
+{
+    resize: none;
+    width: 500px;
+    height: 200px;
+    overflow-y: auto;
+}
