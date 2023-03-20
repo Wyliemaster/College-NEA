@@ -11,6 +11,7 @@ if ($_COOKIE["LOGIN"]) {
     $desc = clean($_GET["desc"]);
     $code = strip_tags($_GET["code"]);
 
+    // Ensuring the data is valid
     if (!empty($title) && !empty($desc) && !empty(Decompiler::decompile($code, FileMagic::ASSEMBLY))) {
 
         $db = db_connect();
@@ -34,6 +35,7 @@ if ($_COOKIE["LOGIN"]) {
             }
         }
     }
-    header("Location: ../../?ERROR=UPLOAD%3A%20INVALID%20INPUT");
+    // creates alert saying "Upload Error: Invalid input
+    header("Location: ../../?ERROR=Upload%20Error%3A%20INVALID%20INPUT");
     exit();
 }
