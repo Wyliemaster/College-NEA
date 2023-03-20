@@ -15,7 +15,7 @@ if (!empty($name) && !empty($pass)) {
         header("Location: ../../?ERROR=Login%20Error%3A%20Username%20is%20too%20short.%20Please%20make%20sure%20your%20username%20is%20atleast%204%20characters%20long");
         exit("REDIRECT_ERROR: <a href='../../'>Return to home page</a>"); // In the event that the redirect doesn't work
     }
-    // Forcing password to be atleast 7 characters long
+    // Forcing password to be atleast 8 characters long
     // for the sake of keeping their account secure
     if (strlen($pass) < 8)
     {
