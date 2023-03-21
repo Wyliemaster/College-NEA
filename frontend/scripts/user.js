@@ -23,7 +23,7 @@ async function get_content(filter, user) {
       "popup",
       "details_prefab",
       {
-        "[[POPUP_TITLE]]": `${element["content_title"]} <img src=/NEA/Assets/like_00${element["rating_id"] ? 2 : 1}.png style="width:25px; height:25px;" onclick="like(${element["content_id"]})">`,
+        "[[POPUP_TITLE]]": `${element["content_title"]} <img src=/NEA/Assets/like_00${element["rating_id"] ? 2 : 1}.png style="width:25px; height:25px; cursor: pointer;" onclick="like(${element["content_id"]})">`,
         "[[POPUP_DESC]]": element["content_description"],
         "[[POPUP_CONTAINER]]": container,
       },

@@ -29,12 +29,13 @@ switch($_GET["filter"])
                 WHEN :name <> '' THEN (
                     SELECT count(*) 
                     FROM tblratings 
-                    WHERE tblusers.user_name = :name AND tblratings.user_id = tblusers.user_id
+                    WHERE tblratings.content_id = tblcontent.content_id
+                    AND tblratings.user_id = (SELECT tblusers.user_id FROM tblusers WHERE tblusers.user_name = :name)
                 )
-            END AS rating_id  - This checks if there is a user logged in.
-                                If they have, it gets the rate state of
-                                the content in question and stores it
-                                inside of a rating_id column
+            END AS rating_id   - This checks if there is a user logged in.
+                                    If they have, it gets the rate state of
+                                    the content in question and stores it
+                                    inside of a rating_id column
 
         
             LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id - OUTER JOIN
@@ -48,11 +49,12 @@ switch($_GET["filter"])
             tblcontent.content_description, 
             tblcontent.content_code, 
             CASE
-                WHEN :name <> '' THEN (
-                    SELECT count(*) 
-                    FROM tblratings 
-                    WHERE tblusers.user_name = :name AND tblratings.user_id = tblusers.user_id
-                )
+            WHEN :name <> '' THEN (
+                SELECT count(*) 
+                FROM tblratings 
+                WHERE tblratings.content_id = tblcontent.content_id
+                AND tblratings.user_id = (SELECT tblusers.user_id FROM tblusers WHERE tblusers.user_name = :name)
+            )
             END AS rating_id 
             FROM tblcontent INNER JOIN tblusers ON tblcontent.user_id = tblusers.user_id 
             LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id
@@ -82,12 +84,13 @@ switch($_GET["filter"])
                 WHEN :name <> '' THEN (
                     SELECT count(*) 
                     FROM tblratings 
-                    WHERE tblusers.user_name = :name AND tblratings.user_id = tblusers.user_id
+                    WHERE tblratings.content_id = tblcontent.content_id
+                    AND tblratings.user_id = (SELECT tblusers.user_id FROM tblusers WHERE tblusers.user_name = :name)
                 )
-            END AS rating_id  - This checks if there is a user logged in.
-                                If they have, it gets the rate state of
-                                the content in question and stores it
-                                inside of a rating_id column
+            END AS rating_id - This checks if there is a user logged in.
+                                    If they have, it gets the rate state of
+                                    the content in question and stores it
+                                    inside of a rating_id column
 
         
             LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id - OUTER JOIN
@@ -105,7 +108,8 @@ switch($_GET["filter"])
             WHEN :name <> '' THEN (
                 SELECT count(*) 
                 FROM tblratings 
-                WHERE tblusers.user_name = :name AND tblratings.user_id = tblusers.user_id
+                WHERE tblratings.content_id = tblcontent.content_id
+                AND tblratings.user_id = (SELECT tblusers.user_id FROM tblusers WHERE tblusers.user_name = :name)
             )
         END AS rating_id 
         FROM tblcontent INNER JOIN tblusers ON tblcontent.user_id = tblusers.user_id 
@@ -134,12 +138,13 @@ switch($_GET["filter"])
                 WHEN :name <> '' THEN (
                     SELECT count(*) 
                     FROM tblratings 
-                    WHERE tblusers.user_name = :name AND tblratings.user_id = tblusers.user_id
+                    WHERE tblratings.content_id = tblcontent.content_id
+                    AND tblratings.user_id = (SELECT tblusers.user_id FROM tblusers WHERE tblusers.user_name = :name)
                 )
-            END AS rating_id  - This checks if there is a user logged in.
-                                If they have, it gets the rate state of
-                                the content in question and stores it
-                                inside of a rating_id column
+            END AS rating_id - This checks if there is a user logged in.
+                                    If they have, it gets the rate state of
+                                    the content in question and stores it
+                                    inside of a rating_id column
 
 
             LEFT OUTER JOIN tblratings ON tblcontent.content_id = tblratings.content_id - OUTER JOIN
@@ -155,7 +160,8 @@ switch($_GET["filter"])
             WHEN :name <> '' THEN (
                 SELECT count(*) 
                 FROM tblratings 
-                WHERE tblusers.user_name = :name AND tblratings.user_id = tblusers.user_id
+                WHERE tblratings.content_id = tblcontent.content_id
+                AND tblratings.user_id = (SELECT tblusers.user_id FROM tblusers WHERE tblusers.user_name = :name)
             )
         END AS rating_id 
         FROM tblcontent INNER JOIN tblusers ON tblcontent.user_id = tblusers.user_id 
