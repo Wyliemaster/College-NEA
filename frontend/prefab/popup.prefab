@@ -51,8 +51,12 @@
         }
 
         #prefab-popup-description-[[PREFAB_ID]] {
+            padding: 0 5%;
             font-size: large;
         }
+
+
+
     </style>
 
     <div id="prefab-popup-background-[[PREFAB_ID]]" onclick='{ 

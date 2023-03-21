@@ -14,7 +14,8 @@
     background-color: rgba(0, 0, 0, 0.124);
     box-sizing: content-box;
     width: 80%;
-    height: 1024px;
+    min-height: 863px;
+    height: auto;
     word-wrap: break-word;
     inline-size: 40%;
     border: black 1px solid;
@@ -51,7 +52,9 @@
     text-decoration: none;
     color: white;
 
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* creates an effect when hovering over a button*/
@@ -76,6 +79,44 @@ textarea
 {
     resize: none;
     width: 500px;
-    height: 200px;
+    min-height: 200px;
+    height: auto;
     overflow-y: auto;
+}
+
+/* Mobile Logic */
+@media only screen and (max-device-width: 480px)
+{
+
+    textarea
+    {
+        width: 150px;
+        min-height: 150px;
+    }
+
+    .main-input-output-buttons
+    {
+        height: 500px;
+
+    }
+
+    .main-input-output-box
+    {
+        width: 100%;
+        height: auto;
+
+        min-height: 300px;
+    }
+
+    .main-input-output
+    {
+        flex-direction: column;
+    }
+
+    .main-input-output-btn
+    {
+        width: 300px;
+        height: 400px;
+    }
+
 }

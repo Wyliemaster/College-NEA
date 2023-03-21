@@ -11,7 +11,7 @@ body
     padding: 0;
     display: flex;
     flex-direction: column;
-    overflow-y: hidden;
+    overflow-y: auto;
 
     background: rgb(152, 152, 152);
 
@@ -56,4 +56,23 @@ body
     align-items: center;
     justify-content: center;
     font-size: larger;
+}
+
+/* Mobile Logic */
+@media only screen and (max-device-width: 480px){
+
+    body
+    {
+        overflow-y: auto;
+    }
+
+    .global-navbar-item
+    {
+        padding: 15px 10px;
+    }
+
+    .global-navbar-title
+    {
+        display: none;
+    }
 }

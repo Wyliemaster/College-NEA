@@ -75,3 +75,32 @@ body
     text-align: center;
     font-size: xx-large;
 }
+
+/* Mobile Logic */
+@media only screen and (max-device-width: 480px)
+{
+
+    .user-filters
+    {
+        margin-bottom: 5%;
+    }
+
+    .user-filter-btn
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 50%;
+        height: 50px;
+    }
+
+
+    .user-content-btn
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 80%;
+        height: 100px;
+    }
+}
